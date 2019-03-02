@@ -86,7 +86,13 @@ double Pokemon::modifier(Pokemon &foe, Type moveType)
 	return criticalHit() * random() * this->stab(moveType) * this->typeDamage(foe, moveType);
 }
 
-double Pokemon::damage(Pokemon &foe, int power, Type moveType)
+double Pokemon::damage(Pokemon &foe, int power, Type moveType, Effect moveEffect)
 {
-	return ((((2 * this->p_level) / 5 + 2) * power * (this->p_attack / foe.p_defense)) / 50 + 2) * this->modifier(foe, moveType);
+	int atk, def;
+	if (moveEffect == PHYSICAL)
+		atk = this->p_attack, def = foe.p_defense;
+	else if (moveEffect == SPECIAL)
+		atk = this->p_spAttack, def = foe.p_spDefense;
+
+	return ((((2 * this->p_level) / 5 + 2) * power * (atk / def)) / 50 + 2) * this->modifier(foe, moveType);
 }

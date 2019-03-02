@@ -16,7 +16,7 @@ void Pokemon::tackle(Pokemon &foe)
 	cout << this->p_name << " used Tackle!\n\n";
 
 	if (1 + rand() % 100 <= prob)
-		foe.p_HP -= damage(foe, 40, NORMAL);
+		foe.p_HP -= damage(foe, 40, NORMAL, PHYSICAL);
 
 	else
 	{
@@ -36,7 +36,7 @@ void Pokemon::scratch(Pokemon &foe)
 	cout << this->p_name << " used Scratch!\n\n";
 
 	if (1 + rand() % 100 <= prob)
-		foe.p_HP -= damage(foe, 40, NORMAL);
+		foe.p_HP -= damage(foe, 40, NORMAL, PHYSICAL);
 
 	else
 	{
@@ -109,7 +109,7 @@ void Pokemon::gust(Pokemon &foe)
 	cout << this->p_name << " used Gust!\n\n";
 
 	if (1 + rand() % 100 <= prob)
-		foe.p_HP -= damage(foe, 40, FLYING);
+		foe.p_HP -= damage(foe, 40, FLYING, SPECIAL);
 
 	else
 	{
@@ -128,7 +128,7 @@ void Pokemon::peck(Pokemon &foe)
 	cout << this->p_name << " used Peck!\n\n";
 
 	if (1 + rand() % 100 <= prob)
-		foe.p_HP -= damage(foe, 35, FLYING);
+		foe.p_HP -= damage(foe, 35, FLYING, PHYSICAL);
 
 	else
 	{
@@ -148,7 +148,7 @@ void Pokemon::absorb(Pokemon &foe)
 
 	if (1 + rand() % 100 <= prob)
 	{
-		int temp = damage(foe, 20, GRASS);
+		int temp = damage(foe, 20, GRASS, SPECIAL);
 		foe.p_HP -= temp;
 
 		if (this->p_HP < p_HPMax - temp)
@@ -177,5 +177,5 @@ void Pokemon::growth(Pokemon &pkmn)
 	cout << this->p_name << " used Growth!\n\n";
 	next;
 
-	changeStat(pkmn, "attack", 1);
+	changeStat(pkmn, "spAttack", 1);
 }

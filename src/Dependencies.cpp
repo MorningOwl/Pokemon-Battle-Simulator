@@ -77,7 +77,7 @@ void logMoveInfo(Pokemon pkmn, Move move)
 			break;
 
 		case GROWTH:
-			cout << "The user's body grows all at once, raising the Attack stat.\n\n";
+			cout << "The user's body grows all at once, raising the Attack and Special\n        " << space << "Attack stats.\n\n";
 			break;
 	}
 }

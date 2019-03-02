@@ -19,6 +19,8 @@ void Pokemon::initPokemon(PID Name)
 		this->p_HP = 19;
 		this->p_attack = 8;
 		this->p_defense = 8;
+		this->p_spAttack = 9;
+		this->p_spDefense = 9;
 		this->p_speed = 8;
 		this->p_move[1].m_ID = GROWL;
 		this->p_move[2].m_ID = TACKLE;
@@ -32,6 +34,8 @@ void Pokemon::initPokemon(PID Name)
 		this->p_HP = 18;
 		this->p_attack = 9;
 		this->p_defense = 8;
+		this->p_spAttack = 9;
+		this->p_spDefense = 9;
 		this->p_speed = 9;
 		this->p_move[1].m_ID = SCRATCH;
 		this->p_move[2].m_ID = GROWL;
@@ -45,6 +49,8 @@ void Pokemon::initPokemon(PID Name)
 		this->p_HP = 19;
 		this->p_attack = 8;
 		this->p_defense = 9;
+		this->p_spAttack = 9;
+		this->p_spDefense = 9;
 		this->p_speed = 8;
 		this->p_move[1].m_ID = TACKLE;
 		this->p_move[2].m_ID = TAILWHIP;
@@ -59,6 +65,8 @@ void Pokemon::initPokemon(PID Name)
 		this->p_HP = 19;
 		this->p_attack = 8;
 		this->p_defense = 8;
+		this->p_spAttack = 7;
+		this->p_spDefense = 7;
 		this->p_speed = 7;
 		this->p_move[1].m_ID = TACKLE;
 		this->p_move[2].m_ID = SANDATTACK;
@@ -74,6 +82,8 @@ void Pokemon::initPokemon(PID Name)
 		this->p_HP = 18;
 		this->p_attack = 9;
 		this->p_defense = 7;
+		this->p_spAttack = 6;
+		this->p_spDefense = 7;
 		this->p_speed = 10;
 		this->p_move[1].m_ID = TACKLE;
 		this->p_move[2].m_ID = TAILWHIP;
@@ -88,6 +98,8 @@ void Pokemon::initPokemon(PID Name)
 		this->p_HP = 19;
 		this->p_attack = 9;
 		this->p_defense = 7;
+		this->p_spAttack = 7;
+		this->p_spDefense = 7;
 		this->p_speed = 10;
 		this->p_move[1].m_ID = PECK;
 		this->p_move[2].m_ID = GROWL;
@@ -102,6 +114,8 @@ void Pokemon::initPokemon(PID Name)
 			this->p_HP = 19;
 			this->p_attack = 9;
 			this->p_defense = 9;
+			this->p_spAttack = 10;
+			this->p_spDefense = 9;
 			this->p_speed = 7;
 			this->p_move[1].m_ID = ABSORB;
 			this->p_move[2].m_ID = GROWTH;
@@ -112,8 +126,12 @@ void Pokemon::initPokemon(PID Name)
 	this->p_HPMax = this->p_HP;
 	this->p_attackMax = this->p_attack;
 	this->p_attackInitial = this->p_attack;
+	this->p_spAttackMax = this->p_attack;
+	this->p_spAttackInitial = this->p_attack;
 	this->p_defenseMax = this->p_defense;
 	this->p_defenseInitial = this->p_defense;
+	this->p_spDefenseMax = this->p_defense;
+	this->p_spDefenseInitial = this->p_defense;
 	this->p_speedMax = this->p_speed;
 	this->p_speedInitial = this->p_speed;
 
@@ -128,7 +146,7 @@ void Pokemon::initMoves()
 			case TACKLE:
 				this->p_move[i].m_name = "Tackle";
 				this->p_move[i].m_type = NORMAL;
-				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_effect = DAMAGE;
 				this->p_move[i].m_PP = 35;
 				break;
 
@@ -142,7 +160,7 @@ void Pokemon::initMoves()
 			case SCRATCH:
 				this->p_move[i].m_name = "Scratch";
 				this->p_move[i].m_type = NORMAL;
-				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_effect = DAMAGE;
 				this->p_move[i].m_PP = 35;
 				break;
 
@@ -163,21 +181,21 @@ void Pokemon::initMoves()
 			case GUST:
 				this->p_move[i].m_name = "Gust";
 				this->p_move[i].m_type = FLYING;
-				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_effect = DAMAGE;
 				this->p_move[i].m_PP = 35;
 				break;
 
 			case PECK:
 				this->p_move[i].m_name = "Peck";
 				this->p_move[i].m_type = FLYING;
-				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_effect = DAMAGE;
 				this->p_move[i].m_PP = 35;
 				break;
 
 			case ABSORB:
 				this->p_move[i].m_name = "Absorb";
 				this->p_move[i].m_type = GRASS;
-				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_effect = DAMAGE;
 				this->p_move[i].m_PP = 25;
 				break;
 			

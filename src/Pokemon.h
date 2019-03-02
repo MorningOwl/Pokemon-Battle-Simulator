@@ -5,7 +5,7 @@ enum GameMode { MENU, CLASSIC, MULTIPLAYER, ENDLESS, CAMPAIGN };
 enum PID { BULBASAUR, CHARMANDER, SQUIRTLE, PIDGEY, RATTATA, SPEAROW, ODDISH };
 enum Type { _, NORMAL, GRASS, FIRE, WATER, POISON, FLYING, GROUND };
 enum MID { NONE, TACKLE, GROWL, SCRATCH, TAILWHIP, SANDATTACK, GUST, PECK, ABSORB, GROWTH };
-enum Effect { PHYSICAL, STATUS };
+enum Effect { PHYSICAL, SPECIAL, STATUS, DAMAGE };
 
 
 class Move
@@ -35,6 +35,8 @@ class Pokemon
 		int p_HP, p_HPMax;
 		int p_attack, p_attackMax, p_attackInitial;
 		int p_defense, p_defenseMax, p_defenseInitial;
+		int p_spAttack, p_spAttackMax, p_spAttackInitial;
+		int p_spDefense, p_spDefenseMax, p_spDefenseInitial;
 		int p_speed, p_speedMax, p_speedInitial;
 
 		double p_accuracy = 1;
@@ -42,6 +44,8 @@ class Pokemon
 
 		int p_attackLevel = 0;
 		int p_defenseLevel = 0;
+		int p_spAttackLevel = 0;
+		int p_spDefenseLevel = 0;
 		int p_accuracyLevel = 0;
 		int p_evasionLevel = 0;
 
@@ -71,7 +75,7 @@ class Pokemon
 		double stab(Type moveType);
 		double typeDamage(Pokemon &foe, Type moveType);
 		double modifier(Pokemon &foe, Type moveType);
-		double damage(Pokemon &foe, int power, Type moveType);
+		double damage(Pokemon &foe, int power, Type moveType, Effect moveEffect);
 };
 
 

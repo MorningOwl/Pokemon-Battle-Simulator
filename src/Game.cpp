@@ -253,10 +253,12 @@ void stats()
 	cout << pkmn.p_name << endl;
 	if (pkmn.p_type2 == NONE) cout << pkmn.p_type1Name << endl;
 	else cout << pkmn.p_type1Name << ", " << pkmn.p_type2Name << endl;
-	cout << "Level: " << pkmn.p_level;
+	cout << "Level: " << pkmn.p_level << endl;
 	cout << "Health: " << pkmn.p_HP << endl;
 	cout << "Attack: " << pkmn.p_attack << endl;
 	cout << "Defense: " << pkmn.p_defense << endl;
+	cout << "Sp. Atk: " << pkmn.p_spAttack << endl;
+	cout << "Sp. Def: " << pkmn.p_spDefense << endl;
 	cout << "Speed: " << pkmn.p_speed << "\n\n";
 	next;
 }
@@ -480,62 +482,63 @@ int foeTurn()
 			break;
 
 		case 2:
-			if ((foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == PHYSICAL) || (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS))
+			if ((foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE) ||
+				(foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS))
 				if (prob < 11) foe.move1(foe, pkmn); else foe.move2(foe, pkmn);
-			else if (foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS)
 				if (prob < 15) foe.move1(foe, pkmn); else foe.move2(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == PHYSICAL)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE)
 				if (prob < 7) foe.move1(foe, pkmn); else foe.move2(foe, pkmn);
 			break;
 
 		case 3:
-			if ((foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == PHYSICAL) ||
+			if ((foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE) ||
 				(foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS))
 				if (prob < 8) foe.move1(foe, pkmn); else if (prob < 15) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
-			else if (foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS)
 				if (prob < 13) foe.move1(foe, pkmn); else if (prob < 17) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS)
 				if (prob < 5) foe.move1(foe, pkmn); else if (prob < 17) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == PHYSICAL)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE)
 				if (prob < 5) foe.move1(foe, pkmn); else if (prob < 9) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == PHYSICAL)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE)
 				if (prob < 5) foe.move1(foe, pkmn); else if (prob < 13) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
-			else if (foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == PHYSICAL)
+			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE)
 				if (prob < 9) foe.move1(foe, pkmn); else if (prob < 13) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
-			else if (foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS)
 				if (prob < 9) foe.move1(foe, pkmn); else if (prob < 17) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
 			break;
 
 		case 4:
-			if ((foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == PHYSICAL) ||
+			if ((foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == DAMAGE) ||
 				(foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS))
 				if (prob < 6) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 16) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
 				if (prob < 12) foe.move1(foe, pkmn); else if (prob < 15) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
 				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 15) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS)
 				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 7) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == PHYSICAL)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == DAMAGE)
 				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 7) foe.move2(foe, pkmn); else if (prob < 10) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if ((foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == PHYSICAL) ||
-				(foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == PHYSICAL) ||
-				(foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == PHYSICAL) ||
-				(foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == STATUS))
+			else if ((foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == DAMAGE) ||
+				(foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == DAMAGE) ||
+				(foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == DAMAGE) ||
+				(foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS))
 				if (prob < 6) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 16) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
 				if (prob < 8) foe.move1(foe, pkmn); else if (prob < 15) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS)
 				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == PHYSICAL)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == DAMAGE)
 				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS)
 				if (prob < 8) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == PHYSICAL)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == DAMAGE)
 				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 13) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == PHYSICAL && foe.p_move[3].m_effect == PHYSICAL && foe.p_move[4].m_effect == STATUS)
+			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS)
 				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
-			else if (foe.p_move[1].m_effect == PHYSICAL && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == PHYSICAL)
+			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == DAMAGE)
 				if (prob < 8) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 14) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
 	}
 

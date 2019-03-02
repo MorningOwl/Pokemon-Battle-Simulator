@@ -3,10 +3,21 @@
 #include <ctime>
 #include "Pokemon.h"
 #include "Dependencies.h"
+#include "Maps.h"
 
 #define next system("pause"); system("cls")
 
 using namespace std;
+
+class Player
+{
+	public:
+		int y, x;
+		Player(int y, int  x) :x(x), y(y) {};
+};
+
+Player player(16, 30);
+char key = 'x';
 
 GameMode mode = MENU;
 Pokemon pkmn, foe;
@@ -14,6 +25,7 @@ int det, det1, det2;
 
 void ClassicMode();
 void EndlessMode();
+void CampaignTest();
 void CampaignMode();
 
 
@@ -30,7 +42,7 @@ int main()
 			cin >> det;
 			system("cls");
 			if (det == 0) exit(EXIT_SUCCESS);
-			if (det == 1 || det == 2 || det == 9999) break;
+			if (det == 1 || det == 2 || det == 9999 || det == 1111) break;
 		}
 
 		switch (det)
@@ -46,6 +58,11 @@ int main()
 				break;
 
 			case 9999:
+				mode = CAMPAIGN;
+				CampaignTest();
+				break;
+
+			case 1111:
 				mode = CAMPAIGN;
 				CampaignMode();
 		}
@@ -721,7 +738,7 @@ void EndlessMode()
 	}
 }
 
-void CampaignMode()
+void CampaignTest()
 {
 	Pokemon Pkmn[7], rival;
 
@@ -748,5 +765,137 @@ void CampaignMode()
 	{
 		if (playerTurn(rival) == -1) break;
 		if (foeTurn(rival)) break;
+	}
+
+	pkmn.refresh();
+	srand(time(0));
+
+	for (int i = 0; i < 3; i++)
+		while (true)
+		{
+			int prob = 1 + rand() % 4;
+			switch (prob)
+			{
+				case 1:foe.initPokemon(PIDGEY); break;
+				case 2:foe.initPokemon(RATTATA); break;
+				case 3:foe.initPokemon(SPEAROW); break;
+				case 4:foe.initPokemon(ODDISH); break;
+			}
+
+			cout << "Encountered a wild " << foe.p_name << "!\n\n", next;
+
+			while (true)
+			{
+				if (playerTurn(foe) == -1) break;
+				if (foeTurn(foe)) break;
+			}
+		}
+}
+
+
+//CAMPGIGN MODE
+
+void displayMap();
+void getUserInput();
+
+void CheckForWildPokemon();
+void WildPokemonBattle();
+
+
+void CampaignMode()
+{
+	pkmn.initPokemon(BULBASAUR);
+
+	while (true)
+	{
+		displayMap();
+		getUserInput();
+	}
+}
+
+
+void displayMap()
+{
+	for (int y = 0; y < 20; y++)
+	{
+		for (int x = 0; x < 40; x++)
+		{
+			if (player.y == y && player.x == x)
+				cout << char(2);
+
+			else if (map[y][x] == 1)
+				cout << "_";
+
+			else if (map[y][x] == 3)
+				cout << "|";
+
+			else if (map[y][x] == 4)
+				cout << "#";
+
+			else if (map[y][x] == 0)
+				cout << " ";
+		}
+
+		cout << endl;
+	}
+}
+
+void CheckForWildPokemon()
+{
+	srand(time(0));
+	int prob = 1 + rand() % 4;
+	
+	if (map[player.y][player.x] == 4 && prob == 1)
+		WildPokemonBattle();
+}
+
+void getUserInput()
+{
+	cin >> key;
+	system("cls");
+
+	switch (key)
+	{
+		case 'w':
+			if (map[player.y - 1][player.x] % 2 == 0)
+				player.y--;
+			break;
+
+		case 's':
+			if (map[player.y + 1][player.x] % 2 == 0)
+				player.y++;
+			break;
+
+
+		case 'a':
+			if (map[player.y][player.x - 1] % 2 == 0)
+				player.x--;
+			break;
+
+		case 'd':
+			if (map[player.y][player.x + 1] % 2 == 0)
+				player.x++;
+	}
+
+	CheckForWildPokemon();
+}
+
+void WildPokemonBattle()
+{
+	srand(time(0));
+	int prob = 1 + rand() % 2;
+
+	switch (prob)
+	{
+		case 1:foe.initPokemon(PIDGEY); break;
+		case 2:foe.initPokemon(RATTATA);
+	}
+
+	cout << "Encountered a wild " << foe.p_name << "!\n\n", next;
+
+	while (true)
+	{
+		if (playerTurn(foe) == -1) break;
+		if (foeTurn(foe)) break;
 	}
 }

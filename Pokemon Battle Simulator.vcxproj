@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Dependencies.h" />
+    <ClInclude Include="src\Maps.h" />
     <ClInclude Include="src\Pokemon.h" />
   </ItemGroup>
   <ItemGroup>

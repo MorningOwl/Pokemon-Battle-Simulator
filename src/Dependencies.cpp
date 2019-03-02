@@ -7,6 +7,7 @@
 using namespace std;
 
 
+//Log Functions
 void logMove(Pokemon pkmn, const char* move, int num, bool nextLine)
 {
 	string space = "";
@@ -82,6 +83,8 @@ void logMoveInfo(Pokemon pkmn, Move move)
 	}
 }
 
+
+//Operator Overloads
 void Pokemon::operator=(Pokemon pkmn)
 {
 	this->p_name = pkmn.p_name;
@@ -167,4 +170,24 @@ bool Pokemon::operator==(Pokemon pkmn)
 	if (!(this->p_XAttackNum == pkmn.p_XAttackNum && this->p_XDefenseNum == pkmn.p_XDefenseNum)) return false;
 
 	return true;
+}
+
+
+//Campaign Functions
+void Pokemon::refresh()
+{
+	this->p_HP = this->p_HPMax;
+	this->p_attack = this->p_attackMax;
+	this->p_defense = this->p_defenseMax;
+	this->p_spAttack = this->p_spAttackMax;
+	this->p_spDefense = this->p_spDefenseMax;
+	this->p_speed = this->p_speedMax;
+	this->p_accuracy = 1;
+	this->p_evasion = 1;
+	this->p_attackLevel = 0;
+	this->p_defenseLevel = 0;
+	this->p_spAttackLevel = 0;
+	this->p_spDefenseLevel = 0;
+	this->p_accuracyLevel = 0;
+	this->p_evasionLevel = 0;
 }

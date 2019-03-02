@@ -22,6 +22,7 @@ class Move
 class Pokemon
 {
 	public:
+		//Definitive Stats
 		const char* p_name;
 		PID p_ID;
 		Type p_type1, p_type2;
@@ -32,6 +33,7 @@ class Pokemon
 		int p_numMoves = 2;
 		Move p_move[5];
 
+		//Variable Stats
 		int p_HP, p_HPMax;
 		int p_attack, p_attackMax, p_attackInitial;
 		int p_defense, p_defenseMax, p_defenseInitial;
@@ -51,10 +53,12 @@ class Pokemon
 
 		int p_potionNum = 1, p_etherNum = 1;
 		int p_XAttackNum = 1, p_XDefenseNum = 1;
-
+		
+		//Initialization
 		void initPokemon(PID Name);
 		void initMoves();
 
+		//Moves
 		void move1(Pokemon &pkmn, Pokemon &foe);
 		void move2(Pokemon &pkmn, Pokemon &foe);
 		void move3(Pokemon &pkmn, Pokemon &foe);
@@ -70,6 +74,7 @@ class Pokemon
 		void absorb(Pokemon &foe);
 		void growth(Pokemon &pkmn);
 
+		//Dependencies
 		void changeStat(Pokemon &target, const char* stat, int det);
 
 		double stab(Type moveType);
@@ -77,9 +82,10 @@ class Pokemon
 		double modifier(Pokemon &foe, Type moveType);
 		double damage(Pokemon &foe, int power, Type moveType, Effect moveEffect);
 
-		void operator=(Pokemon pkmn);
-		bool operator==(Pokemon pkmn);
-		//Update this whenever updating Pokemon attributes
+		void operator=(Pokemon pkmn);		//Update these whenever updating 
+		bool operator==(Pokemon pkmn);		//Pokemon attributes
+
+		void refresh();
 };
 
 

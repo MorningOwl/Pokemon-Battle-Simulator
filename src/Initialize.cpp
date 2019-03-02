@@ -6,7 +6,7 @@
 using namespace std;
 
 
-void Pokemon::initPokemon(ID Name)
+void Pokemon::initPokemon(PID Name)
 {
 	switch (Name)
 	{
@@ -20,10 +20,8 @@ void Pokemon::initPokemon(ID Name)
 		this->p_attack = 8;
 		this->p_defense = 8;
 		this->p_speed = 8;
-		this->p_moveID[1] = GROWL;
-		this->p_moveID[2] = TACKLE;
-		this->p_moveID[3] = NONE;
-		this->p_moveID[4] = NONE;
+		this->p_move[1].m_ID = GROWL;
+		this->p_move[2].m_ID = TACKLE;
 		break;
 
 	case CHARMANDER:
@@ -35,10 +33,8 @@ void Pokemon::initPokemon(ID Name)
 		this->p_attack = 9;
 		this->p_defense = 8;
 		this->p_speed = 9;
-		this->p_moveID[1] = SCRATCH;
-		this->p_moveID[2] = GROWL;
-		this->p_moveID[3] = NONE;
-		this->p_moveID[4] = NONE;
+		this->p_move[1].m_ID = SCRATCH;
+		this->p_move[2].m_ID = GROWL;
 		break;
 
 	case SQUIRTLE:
@@ -50,10 +46,8 @@ void Pokemon::initPokemon(ID Name)
 		this->p_attack = 8;
 		this->p_defense = 9;
 		this->p_speed = 8;
-		this->p_moveID[1] = TACKLE;
-		this->p_moveID[2] = TAILWHIP;
-		this->p_moveID[3] = NONE;
-		this->p_moveID[4] = NONE;
+		this->p_move[1].m_ID = TACKLE;
+		this->p_move[2].m_ID = TAILWHIP;
 		break;
 
 	case PIDGEY:
@@ -66,10 +60,9 @@ void Pokemon::initPokemon(ID Name)
 		this->p_attack = 8;
 		this->p_defense = 8;
 		this->p_speed = 7;
-		this->p_moveID[1] = TACKLE;
-		this->p_moveID[2] = SANDATTACK;
-		this->p_moveID[3] = GUST;
-		this->p_moveID[4] = NONE;
+		this->p_move[1].m_ID = TACKLE;
+		this->p_move[2].m_ID = SANDATTACK;
+		this->p_move[3].m_ID = GUST;
 		this->p_numMoves = 3;
 		break;
 
@@ -82,10 +75,8 @@ void Pokemon::initPokemon(ID Name)
 		this->p_attack = 9;
 		this->p_defense = 7;
 		this->p_speed = 10;
-		this->p_moveID[1] = TACKLE;
-		this->p_moveID[2] = TAILWHIP;
-		this->p_moveID[3] = NONE;
-		this->p_moveID[4] = NONE;
+		this->p_move[1].m_ID = TACKLE;
+		this->p_move[2].m_ID = TAILWHIP;
 		break;
 
 	case SPEAROW:
@@ -98,10 +89,8 @@ void Pokemon::initPokemon(ID Name)
 		this->p_attack = 9;
 		this->p_defense = 7;
 		this->p_speed = 10;
-		this->p_moveID[1] = PECK;
-		this->p_moveID[2] = GROWL;
-		this->p_moveID[3] = NONE;
-		this->p_moveID[4] = NONE;
+		this->p_move[1].m_ID = PECK;
+		this->p_move[2].m_ID = GROWL;
 		break;
 
 		case ODDISH:
@@ -114,10 +103,8 @@ void Pokemon::initPokemon(ID Name)
 			this->p_attack = 9;
 			this->p_defense = 9;
 			this->p_speed = 7;
-			this->p_moveID[1] = ABSORB;
-			this->p_moveID[2] = GROWTH;
-			this->p_moveID[3] = NONE;
-			this->p_moveID[4] = NONE;
+			this->p_move[1].m_ID = ABSORB;
+			this->p_move[2].m_ID = GROWTH;
 			break;
 	}
 
@@ -136,86 +123,86 @@ void Pokemon::initPokemon(ID Name)
 void Pokemon::initMoves()
 {
 	for (int i = 1; i < 5; i++)
-		switch (this->p_moveID[i])
+		switch (this->p_move[i].m_ID)
 		{
 			case TACKLE:
-				this->p_moveName[i] = "Tackle";
-				this->p_moveType[i] = NORMAL;
-				this->p_moveEffect[i] = PHYSICAL;
-				this->p_movePP[i] = 35;
+				this->p_move[i].m_name = "Tackle";
+				this->p_move[i].m_type = NORMAL;
+				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_PP = 35;
 				break;
 
 			case GROWL:
-				this->p_moveName[i] = "Growl";
-				this->p_moveType[i] = NORMAL;
-				this->p_moveEffect[i] = STATUS;
-				this->p_movePP[i] = 40;
+				this->p_move[i].m_name = "Growl";
+				this->p_move[i].m_type = NORMAL;
+				this->p_move[i].m_effect = STATUS;
+				this->p_move[i].m_PP = 40;
 				break;
 
 			case SCRATCH:
-				this->p_moveName[i] = "Scratch";
-				this->p_moveType[i] = NORMAL;
-				this->p_moveEffect[i] = PHYSICAL;
-				this->p_movePP[i] = 35;
+				this->p_move[i].m_name = "Scratch";
+				this->p_move[i].m_type = NORMAL;
+				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_PP = 35;
 				break;
 
 			case TAILWHIP:
-				this->p_moveName[i] = "Tail Whip";
-				this->p_moveType[i] = NORMAL;
-				this->p_moveEffect[i] = STATUS;
-				this->p_movePP[i] = 35;
+				this->p_move[i].m_name = "Tail Whip";
+				this->p_move[i].m_type = NORMAL;
+				this->p_move[i].m_effect = STATUS;
+				this->p_move[i].m_PP = 35;
 				break;
 
 			case SANDATTACK:
-				this->p_moveName[i] = "Sand Attack";
-				this->p_moveType[i] = GROUND;
-				this->p_moveEffect[i] = STATUS;
-				this->p_movePP[i] = 15;
+				this->p_move[i].m_name = "Sand Attack";
+				this->p_move[i].m_type = GROUND;
+				this->p_move[i].m_effect = STATUS;
+				this->p_move[i].m_PP = 15;
 				break;
 
 			case GUST:
-				this->p_moveName[i] = "Gust";
-				this->p_moveType[i] = FLYING;
-				this->p_moveEffect[i] = PHYSICAL;
-				this->p_movePP[i] = 35;
+				this->p_move[i].m_name = "Gust";
+				this->p_move[i].m_type = FLYING;
+				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_PP = 35;
 				break;
 
 			case PECK:
-				this->p_moveName[i] = "Peck";
-				this->p_moveType[i] = FLYING;
-				this->p_moveEffect[i] = PHYSICAL;
-				this->p_movePP[i] = 35;
+				this->p_move[i].m_name = "Peck";
+				this->p_move[i].m_type = FLYING;
+				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_PP = 35;
 				break;
 
 			case ABSORB:
-				this->p_moveName[i] = "Absorb";
-				this->p_moveType[i] = GRASS;
-				this->p_moveEffect[i] = PHYSICAL;
-				this->p_movePP[i] = 25;
+				this->p_move[i].m_name = "Absorb";
+				this->p_move[i].m_type = GRASS;
+				this->p_move[i].m_effect = PHYSICAL;
+				this->p_move[i].m_PP = 25;
 				break;
 			
 			case GROWTH:
-				this->p_moveName[i] = "Growth";
-				this->p_moveType[i] = NORMAL;
-				this->p_moveEffect[i] = STATUS;
-				this->p_movePP[i] = 40;
+				this->p_move[i].m_name = "Growth";
+				this->p_move[i].m_type = NORMAL;
+				this->p_move[i].m_effect = STATUS;
+				this->p_move[i].m_PP = 40;
 				break;
 		}
 
 	for (int i = 1; i <= this->p_numMoves; i++)
-		this->p_movePPMax[i] = this->p_movePP[i];
+		this->p_move[i].m_PPMax = this->p_move[i].m_PP;
 }
 
 void Pokemon::move1(Pokemon &pkmn, Pokemon &foe)
 {
-	if (this->p_movePP[1] <= 0)
+	if (this->p_move[1].m_PP <= 0)
 	{
 		cout << "That move can no longer be used!\n\n";
 		next;
 		return;
 	}
 
-	switch (this->p_moveID[1])
+	switch (this->p_move[1].m_ID)
 	{
 		case TACKLE: this->tackle(foe); break;
 		case GROWL: this->growl(foe); break;
@@ -228,19 +215,19 @@ void Pokemon::move1(Pokemon &pkmn, Pokemon &foe)
 		case GROWTH: this->growth(pkmn); break;
 	}
 
-	this->p_movePP[1]--;
+	this->p_move[1].m_PP--;
 }
 
 void Pokemon::move2(Pokemon &pkmn, Pokemon &foe)
 {
-	if (this->p_movePP[2] <= 0)
+	if (this->p_move[2].m_PP <= 0)
 	{
 		cout << "That move can no longer be used!\n\n";
 		next;
 		return;
 	}
 
-	switch (this->p_moveID[2])
+	switch (this->p_move[2].m_ID)
 	{
 		case TACKLE: this->tackle(foe); break;
 		case GROWL: this->growl(foe); break;
@@ -253,19 +240,19 @@ void Pokemon::move2(Pokemon &pkmn, Pokemon &foe)
 		case GROWTH: this->growth(pkmn); break;
 	}
 
-	this->p_movePP[2]--;
+	this->p_move[2].m_PP--;
 }
 
 void Pokemon::move3(Pokemon &pkmn, Pokemon &foe)
 {
-	if (this->p_movePP[3] <= 0)
+	if (this->p_move[3].m_PP <= 0)
 	{
 		cout << "That move can no longer be used!\n\n";
 		next;
 		return;
 	}
 
-	switch (this->p_moveID[3])
+	switch (this->p_move[3].m_ID)
 	{
 		case TACKLE: this->tackle(foe); break;
 		case GROWL: this->growl(foe); break;
@@ -278,19 +265,19 @@ void Pokemon::move3(Pokemon &pkmn, Pokemon &foe)
 		case GROWTH: this->growth(pkmn); break;
 	}
 
-	this->p_movePP[3]--;
+	this->p_move[3].m_PP--;
 }
 
 void Pokemon::move4(Pokemon &pkmn, Pokemon &foe)
 {
-	if (this->p_movePP[4] <= 0)
+	if (this->p_move[4].m_PP <= 0)
 	{
 		cout << "That move can no longer be used!\n\n";
 		next;
 		return;
 	}
 
-	switch (this->p_moveID[4])
+	switch (this->p_move[4].m_ID)
 	{
 		case TACKLE: this->tackle(foe); break;
 		case GROWL: this->growl(foe); break;
@@ -303,5 +290,5 @@ void Pokemon::move4(Pokemon &pkmn, Pokemon &foe)
 		case GROWTH: this->growth(pkmn); break;
 	}
 
-	this->p_movePP[4]--;
+	this->p_move[4].m_PP--;
 }

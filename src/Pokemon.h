@@ -76,6 +76,10 @@ class Pokemon
 		double typeDamage(Pokemon &foe, Type moveType);
 		double modifier(Pokemon &foe, Type moveType);
 		double damage(Pokemon &foe, int power, Type moveType, Effect moveEffect);
+
+		void operator=(Pokemon pkmn);
+		bool operator==(Pokemon pkmn);
+		//Update this whenever updating Pokemon attributes
 };
 
 

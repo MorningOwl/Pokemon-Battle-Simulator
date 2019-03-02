@@ -14,6 +14,7 @@ int det, det1, det2;
 
 void ClassicMode();
 void EndlessMode();
+void CampaignMode();
 
 
 int main()
@@ -29,7 +30,7 @@ int main()
 			cin >> det;
 			system("cls");
 			if (det == 0) exit(EXIT_SUCCESS);
-			if (det == 1 || det == 2) break;
+			if (det == 1 || det == 2 || det == 9999) break;
 		}
 
 		switch (det)
@@ -43,11 +44,15 @@ int main()
 				mode = ENDLESS;
 				EndlessMode();
 				break;
+
+			case 9999:
+				mode = CAMPAIGN;
+				CampaignMode();
 		}
 	}
 }
 
-bool win()
+bool win(Pokemon foe)
 {
 	if (foe.p_HP <= 0)
 	{
@@ -58,7 +63,7 @@ bool win()
 }
 
 //MENUS
-int fight()
+int fight(Pokemon &foe)
 {
 	switch (pkmn.p_numMoves)
 	{
@@ -76,7 +81,7 @@ int fight()
 			{
 				case 1:
 					pkmn.move1(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -105,7 +110,7 @@ int fight()
 			{
 				case 1:
 					pkmn.move1(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -115,7 +120,7 @@ int fight()
 
 				case 2:
 					pkmn.move2(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -146,7 +151,7 @@ int fight()
 			{
 				case 1:
 					pkmn.move1(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -156,7 +161,7 @@ int fight()
 
 				case 2:
 					pkmn.move2(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -166,7 +171,7 @@ int fight()
 
 				case 3:
 					pkmn.move3(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -199,7 +204,7 @@ int fight()
 			{
 				case 1:
 					pkmn.move1(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -209,7 +214,7 @@ int fight()
 
 				case 2:
 					pkmn.move2(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -219,7 +224,7 @@ int fight()
 
 				case 3:
 					pkmn.move3(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -229,7 +234,7 @@ int fight()
 
 				case 4:
 					pkmn.move4(pkmn, foe);
-					if (win())
+					if (win(foe))
 					{
 						if (mode == ENDLESS)
 							return 2;
@@ -430,7 +435,7 @@ bool bag()
 }
 
 //TURNS
-int playerTurn()
+int playerTurn(Pokemon &foe)
 {
 	while (true)
 	{
@@ -447,7 +452,7 @@ int playerTurn()
 		switch (det)
 		{
 			case 1:
-				det = fight();
+				det = fight(foe);
 				if (det == 1) return 1;
 				if (det == -1) return -1;
 				if (det == 2) return 2;
@@ -470,7 +475,7 @@ int playerTurn()
 	}
 }
 
-int foeTurn()
+int foeTurn(Pokemon &foe)
 {
 	srand(time(0));
 	int prob = 1 + rand() % 20;
@@ -633,8 +638,8 @@ void ClassicMode()
 
 	while (true)
 	{
-		if (playerTurn() == -1) break;
-		if (foeTurn()) break;
+		if (playerTurn(foe) == -1) break;
+		if (foeTurn(foe)) break;
 	}
 
 	mode = MENU;
@@ -678,7 +683,7 @@ void EndlessMode()
 
 		while (true)
 		{
-			det = playerTurn();
+			det = playerTurn(foe);
 
 			if (det == 2)
 			{
@@ -705,7 +710,7 @@ void EndlessMode()
 				}
 			}
 
-			if (det1 != 2 && foeTurn())
+			if (det1 != 2 && foeTurn(foe))
 			{
 				cout << "You lost!\n\n", next;
 				cout << "You defeated " << count << " Pokemon!\n\n", next;
@@ -713,5 +718,35 @@ void EndlessMode()
 				return;
 			}
 		}
+	}
+}
+
+void CampaignMode()
+{
+	Pokemon Pkmn[7], rival;
+
+	while (true)
+	{
+		cout << "Choose your starting Pokemon:\n\n1.BULBASAUR\n2.CHARMANDER\n3.SQUIRTLE\n\n";
+		cin >> det;
+		system("cls");
+		if (det >= 1 && det <= 3) break;
+	}
+
+	switch (det)
+	{
+		case 1: Pkmn[1].initPokemon(BULBASAUR); rival.initPokemon(CHARMANDER); break;
+		case 2: Pkmn[1].initPokemon(CHARMANDER); rival.initPokemon(SQUIRTLE); break;
+		case 3: Pkmn[1].initPokemon(SQUIRTLE); rival.initPokemon(BULBASAUR);
+	}
+
+	pkmn = Pkmn[1];
+
+	cout << "Your rival chose " << rival.p_name << "!\n\n", next;
+
+	while (true)
+	{
+		if (playerTurn(rival) == -1) break;
+		if (foeTurn(rival)) break;
 	}
 }

@@ -81,3 +81,90 @@ void logMoveInfo(Pokemon pkmn, Move move)
 			break;
 	}
 }
+
+void Pokemon::operator=(Pokemon pkmn)
+{
+	this->p_name = pkmn.p_name;
+	this->p_ID = pkmn.p_ID;
+	this->p_type1 = pkmn.p_type1;
+	this->p_type2 = pkmn.p_type2;
+	this->p_type1Name = pkmn.p_type1Name;
+	this->p_type2Name = pkmn.p_type2Name;
+	this->p_level = pkmn.p_level;
+	this->p_numMoves = pkmn.p_numMoves;
+
+	for (int i = 1; i < 5; i++)
+	{
+		this->p_move[i].m_ID = pkmn.p_move[i].m_ID;
+		this->p_move[i].m_name = pkmn.p_move[i].m_name;
+		this->p_move[i].m_type = pkmn.p_move[i].m_type;
+		this->p_move[i].m_effect = pkmn.p_move[i].m_effect;
+		this->p_move[i].m_PP = pkmn.p_move[i].m_PP;
+		this->p_move[i].m_PPMax = pkmn.p_move[i].m_PPMax;
+	}
+
+	this->p_HP = pkmn.p_HP;
+	this->p_HPMax = pkmn.p_HPMax;
+	this->p_attack = pkmn.p_attack;
+	this->p_attackMax = pkmn.p_attackMax;
+	this->p_attackInitial = pkmn.p_attackInitial;
+	this->p_defense = pkmn.p_defense;
+	this->p_defenseMax = pkmn.p_defenseMax;
+	this->p_defenseInitial = pkmn.p_defenseInitial;
+	this->p_spAttack = pkmn.p_spAttack;
+	this->p_spAttackMax = pkmn.p_spAttackMax;
+	this->p_spAttackInitial = pkmn.p_spAttackInitial;
+	this->p_spDefense = pkmn.p_spDefense;
+	this->p_spDefenseMax = pkmn.p_spDefenseMax;
+	this->p_spDefenseInitial = pkmn.p_spDefenseInitial;
+	this->p_speed = pkmn.p_speed;
+	this->p_speedMax = pkmn.p_speedMax;
+	this->p_speedInitial = pkmn.p_speedInitial;
+
+	this->p_accuracy = pkmn.p_accuracy;
+	this->p_evasion = pkmn.p_evasion;
+
+	this->p_attackLevel = pkmn.p_attackLevel;
+	this->p_defenseLevel = pkmn.p_defenseLevel;
+	this->p_spAttackLevel = pkmn.p_spAttackLevel;
+	this->p_spDefenseLevel = pkmn.p_spDefenseLevel;
+	this->p_accuracyLevel = pkmn.p_accuracyLevel;
+	this->p_evasionLevel = pkmn.p_evasionLevel;
+
+	this->p_potionNum = pkmn.p_potionNum;
+	this->p_etherNum = pkmn.p_etherNum;
+	this->p_XAttackNum = pkmn.p_XAttackNum;
+	this->p_XDefenseNum = pkmn.p_XDefenseNum;
+}
+
+bool Pokemon::operator==(Pokemon pkmn)
+{
+	if (!(this->p_name == pkmn.p_name && this->p_ID == pkmn.p_ID && this->p_type1 == pkmn.p_type1 && this->p_type2 == pkmn.p_type2 &&
+		this->p_type1Name == pkmn.p_type1Name && this->p_type2Name == pkmn.p_type2Name && this->p_level == pkmn.p_level && this->p_numMoves == pkmn.p_numMoves))
+		return false;
+
+	for (int i = 1; i < 5; i++)
+	{
+		if (!(this->p_move[i].m_ID == pkmn.p_move[i].m_ID && this->p_move[i].m_name == pkmn.p_move[i].m_name &&
+			this->p_move[i].m_type == pkmn.p_move[i].m_type && this->p_move[i].m_effect == pkmn.p_move[i].m_effect &&
+			this->p_move[i].m_PP == pkmn.p_move[i].m_PP && this->p_move[i].m_PPMax == pkmn.p_move[i].m_PPMax))
+			return false;
+	}
+
+	if (!(this->p_HP == pkmn.p_HP && this->p_HPMax == pkmn.p_HPMax)) return false;
+	if (!(this->p_attack == pkmn.p_attack && this->p_attackMax == pkmn.p_attackMax && this->p_attackInitial == pkmn.p_attackInitial)) return false;
+	if (!(this->p_defense == pkmn.p_defense && this->p_defenseMax == pkmn.p_defenseMax && this->p_defenseInitial == pkmn.p_defenseInitial)) return false;
+	if (!(this->p_spAttack == pkmn.p_spAttack && this->p_spAttackMax == pkmn.p_spAttackMax && this->p_spAttackInitial == pkmn.p_spAttackInitial)) return false;
+	if (!(this->p_spDefense == pkmn.p_spDefense && this->p_spDefenseMax == pkmn.p_spDefenseMax && this->p_spDefenseInitial == pkmn.p_spDefenseInitial)) return false;
+	if (!(this->p_speed == pkmn.p_speed && this->p_speedMax == pkmn.p_speedMax && this->p_speedInitial == pkmn.p_speedInitial)) return false;
+
+	if (!(this->p_accuracy == pkmn.p_accuracy && this->p_evasion == pkmn.p_evasion)) return false;
+
+	if (!(this->p_attackLevel == pkmn.p_attackLevel && this->p_defenseLevel == pkmn.p_defenseLevel)) return false;
+	if (!(this->p_accuracyLevel == pkmn.p_accuracyLevel && this->p_evasionLevel == pkmn.p_evasionLevel)) return false;
+
+	if (!(this->p_potionNum == pkmn.p_potionNum && this->p_etherNum == pkmn.p_etherNum)) return false;
+	if (!(this->p_XAttackNum == pkmn.p_XAttackNum && this->p_XDefenseNum == pkmn.p_XDefenseNum)) return false;
+
+	return true;
+}

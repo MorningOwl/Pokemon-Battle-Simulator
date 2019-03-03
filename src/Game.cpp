@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <Windows.h>
 #include "Pokemon.h"
 #include "Dependencies.h"
 #include "Maps.h"
@@ -13,15 +14,23 @@ class Player
 {
 	public:
 		int y, x;
+		int potionNum = 1, etherNum = 1;
+		int XAttackNum = 1, XDefenseNum = 1;
+		int pokeBallNum = 5;
+
 		Player(int y, int  x) :x(x), y(y) {};
 };
 
 Player player(16, 30);
 char key = 'x';
+int numPkmn = 1;
 
 GameMode mode = MENU;
 Pokemon pkmn, foe;
+Pokemon Pkmn[7], rival;
+
 int det, det1, det2;
+bool battleEnd = false;
 
 void ClassicMode();
 void EndlessMode();
@@ -285,10 +294,28 @@ void stats()
 	next;
 }
 
+bool switchPokemon()
+{
+	while (true)
+	{
+		for (int i = 1; i <= numPkmn; i++)
+			cout << i << "." << Pkmn[i].p_name << endl;
+		cout << endl << numPkmn + 1 << ".Back\n\n";
+		cin >> det;
+		system("cls");
+		if (det == numPkmn + 1) return false;
+		if (det >= 1 && det <= numPkmn) break;
+	}
+
+	Pkmn[0] = pkmn;
+	pkmn = Pkmn[det];
+	return true;
+}
+
 //ITEMS
 bool potion()
 {
-	if (pkmn.p_potionNum <= 0)
+	if (player.potionNum <= 0)
 	{
 		cout << "Out of potions!\n\n", next;
 		return false;
@@ -301,7 +328,7 @@ bool potion()
 	}
 
 	cout << "Used a potion!\n\n", next;
-	pkmn.p_potionNum--;
+	player.potionNum--;
 
 	if (pkmn.p_HP < pkmn.p_HP - 20)
 		pkmn.p_HP += 20;
@@ -313,7 +340,7 @@ bool potion()
 
 bool ether()
 {
-	if (pkmn.p_etherNum <= 0)
+	if (player.etherNum <= 0)
 	{
 		cout << "Out of ethers!\n\n", next;
 		return false;
@@ -344,7 +371,7 @@ bool ether()
 			else
 			{
 				cout << "Used an ether!\n\n", next;
-				pkmn.p_etherNum--;
+				player.etherNum--;
 				
 				if (pkmn.p_move[i].m_PP < pkmn.p_move[i].m_PPMax - 5)
 					pkmn.p_move[i].m_PP += 10;
@@ -359,14 +386,14 @@ bool ether()
 
 bool XAttack()
 {
-	if (pkmn.p_XAttackNum <= 0)
+	if (player.XAttackNum <= 0)
 	{
 		cout << "Out of X Attacks!\n\n", next;
 		return false;
 	}
 
 	cout << "Used an X Attack!\n\n", next;
-	pkmn.p_XAttackNum--;
+	player.XAttackNum--;
 
 	if (pkmn.p_attackLevel >= 6)
 	{
@@ -381,14 +408,14 @@ bool XAttack()
 
 bool XDefense()
 {
-	if (pkmn.p_XDefenseNum <= 0)
+	if (player.XDefenseNum <= 0)
 	{
 		cout << "Out of X Defenses!\n\n", next;
 		return false;
 	}
 
 	cout << "Used an X Defense!\n\n", next;
-	pkmn.p_XDefenseNum--;
+	player.XDefenseNum--;
 
 	if (pkmn.p_defenseLevel >= 6)
 	{
@@ -401,19 +428,81 @@ bool XDefense()
 	return true;
 }
 
+bool pokeBall()
+{
+	if (player.pokeBallNum <= 0)
+	{
+		cout << "Out of Poke Balls!\n\n", next;
+		return false;
+	}
+
+	cout << "Used a Poke Ball!\n\n", next;
+	player.pokeBallNum--;
+
+	cout << "1..."; Sleep(1000); cout << "2..."; Sleep(1000); cout << "3..."; Sleep(1000);
+	system("cls");
+	cout << "Captured wild " << foe.p_name << "!\n\n", next;
+
+	while (true)
+	{
+		cout << "Would you like to give a nickname to your new " << foe.p_name << "?\n\n";
+		cout << "1.Yes\n2.No\n\n";
+		cin >> det;
+		system("cls");
+		if (det == 1 || det == 2) break;
+	}
+
+	/*if (det == 1)
+	{
+		char name[20];
+
+		while (true)
+		{
+			cout << "Enter nickname:\n\n";
+			cin.ignore();
+			cin.getline(name, 20);
+			foe.p_name = name;
+			cout << "\nIs this name correct?\n\n1.Yes\n2.No\n\n";
+			cin >> det;
+			system("cls");
+			if (det == 1) break;
+		}
+	}*/
+
+	numPkmn++;
+	Pkmn[numPkmn] = foe;
+	battleEnd = true;
+	return true;
+}
+
 bool bag()
 {
 	while (true)
 	{
-		cout << "1.Potion (x" << pkmn.p_potionNum << ")\n";
-		cout << "2.Ether (x" << pkmn.p_etherNum << ")\n";
-		cout << "3.X Attack (x" << pkmn.p_XAttackNum << ")\n";
-		cout << "4.X Defense (x" << pkmn.p_XDefenseNum << ")\n\n";
-		cout << "5.Info...\n";
-		cout << "6.Back\n\n";
-		cin >> det;
-		system("cls");
-		if (det >= 1 && det <= 6) break;
+		cout << "1.Potion (x" << player.potionNum << ")\n";
+		cout << "2.Ether (x" << player.etherNum << ")\n";
+		cout << "3.X Attack (x" << player.XAttackNum << ")\n";
+		cout << "4.X Defense (x" << player.XDefenseNum << ")\n";
+
+		if (mode == CAMPAIGN)
+		{
+			cout << "5.Poke Ball (x" << player.pokeBallNum << ")\n\n";
+			cout << "6.Info...\n";
+			cout << "7.Back\n\n";
+			cin >> det;
+			system("cls");
+			if (det >= 1 && det <= 7) break;
+		}
+
+		else
+		{
+			cout << "\n5.Info...\n";
+			cout << "6.Back\n\n";
+			cin >> det;
+			system("cls");
+			if (det >= 1 && det <= 6) break;
+		}
+
 	}
 
 	switch (det)
@@ -421,24 +510,27 @@ bool bag()
 		case 1:
 			if (potion())
 				return true;
-			break;
+			return false;
 
 		case 2:
 			if (ether())
 				return true;
-			break;
+			return false;
 
 		case 3:
 			if (XAttack())
 				return true;
-			break;
+			return false;
 
 		case 4:
 			if (XDefense())
 				return true;
-			break;
+			return false;
 
 		case 5:
+			if (mode == CAMPAIGN && pokeBall())
+				return true;
+
 			cout << "Potion:    A spray-type medicine for treating wounds. It can be used to restore\n           20 HP to an injured Pokemon.\n\n";
 			cout << "Ether:     This medicine can restore 10 PP to a single selected move that has been\n           learned by a Pokemon.\n\n";
 			cout << "X Attack:  An item that sharply boosts the Attack stat of a Pokemon during battle.\n           It wears off once the Pokemon is withdrawn.\n\n";
@@ -447,6 +539,19 @@ bool bag()
 			return false;
 
 		case 6:
+			if (mode == CAMPAIGN)
+			{
+				cout << "Potion:    A spray-type medicine for treating wounds. It can be used to restore\n           20 HP to an injured Pokemon.\n\n";
+				cout << "Ether:     This medicine can restore 10 PP to a single selected move that has been\n           learned by a Pokemon.\n\n";
+				cout << "X Attack:  An item that sharply boosts the Attack stat of a Pokemon during battle.\n           It wears off once the Pokemon is withdrawn.\n\n";
+				cout << "X Defense: An item that sharply boosts the Defense stat of a Pokemon during battle.\n           It wears off once the Pokemon is withdrawn.\n\n";
+				cout << "Poke Ball: A device for catching wild Pokemon. It is thrown like a ball at a Pokemon,\n           comfortably encapsuling its target.\n\n";
+				next;
+			}
+
+			return false;
+
+		case 7:
 			return false;
 	}
 }
@@ -461,7 +566,8 @@ int playerTurn(Pokemon &foe)
 		cout << "Foe:   "; logName(foe);
 		cout << "******************************\n\n";
 		cout << "What will " << pkmn.p_name << " do?\n\n";
-		cout << "1.Fight\t\t2.Bag\n3.Stats\t\t4.Run\n\n";
+		if (mode == CAMPAIGN) cout << "1.Fight\t\t2.Bag\n3.Pokemon\t4.Run\n\n";
+		else cout << "1.Fight\t\t2.Bag\n3.Stats\t\t4.Run\n\n";
 
 		cin >> det;
 		system("cls");
@@ -481,7 +587,8 @@ int playerTurn(Pokemon &foe)
 				break;
 
 			case 3:
-				stats();
+				if (mode == CAMPAIGN && switchPokemon()) return 1;
+				else if (mode != CAMPAIGN) stats();
 				break;
 
 			case 4:
@@ -740,8 +847,6 @@ void EndlessMode()
 
 void CampaignTest()
 {
-	Pokemon Pkmn[7], rival;
-
 	while (true)
 	{
 		cout << "Choose your starting Pokemon:\n\n1.BULBASAUR\n2.CHARMANDER\n3.SQUIRTLE\n\n";
@@ -804,7 +909,22 @@ void WildPokemonBattle();
 
 void CampaignMode()
 {
-	pkmn.initPokemon(BULBASAUR);
+	while (true)
+	{
+		cout << "Choose your first Pokemon:\n\n1.BULBASAUR\n2.CHARMANDER\n3.SQUIRTLE\n\n";
+		cin >> det;
+		system("cls");
+		if (det >= 1 && det <= 3) break;
+	}
+
+	switch (det)
+	{
+		case 1: pkmn.initPokemon(BULBASAUR); break;
+		case 2: pkmn.initPokemon(CHARMANDER); break;
+		case 3: pkmn.initPokemon(SQUIRTLE);
+	}
+
+	Pkmn[1] = pkmn;
 
 	while (true)
 	{
@@ -896,6 +1016,8 @@ void WildPokemonBattle()
 	while (true)
 	{
 		if (playerTurn(foe) == -1) break;
+		if (battleEnd) { battleEnd = false; break; }
+		cout << "Wild ";
 		if (foeTurn(foe)) break;
 	}
 }

@@ -50,9 +50,6 @@ class Pokemon
 		int p_spDefenseLevel = 0;
 		int p_accuracyLevel = 0;
 		int p_evasionLevel = 0;
-
-		int p_potionNum = 1, p_etherNum = 1;
-		int p_XAttackNum = 1, p_XDefenseNum = 1;
 		
 		//Initialization
 		void initPokemon(PID Name);

@@ -133,11 +133,6 @@ void Pokemon::operator=(Pokemon pkmn)
 	this->p_spDefenseLevel = pkmn.p_spDefenseLevel;
 	this->p_accuracyLevel = pkmn.p_accuracyLevel;
 	this->p_evasionLevel = pkmn.p_evasionLevel;
-
-	this->p_potionNum = pkmn.p_potionNum;
-	this->p_etherNum = pkmn.p_etherNum;
-	this->p_XAttackNum = pkmn.p_XAttackNum;
-	this->p_XDefenseNum = pkmn.p_XDefenseNum;
 }
 
 bool Pokemon::operator==(Pokemon pkmn)
@@ -165,9 +160,6 @@ bool Pokemon::operator==(Pokemon pkmn)
 
 	if (!(this->p_attackLevel == pkmn.p_attackLevel && this->p_defenseLevel == pkmn.p_defenseLevel)) return false;
 	if (!(this->p_accuracyLevel == pkmn.p_accuracyLevel && this->p_evasionLevel == pkmn.p_evasionLevel)) return false;
-
-	if (!(this->p_potionNum == pkmn.p_potionNum && this->p_etherNum == pkmn.p_etherNum)) return false;
-	if (!(this->p_XAttackNum == pkmn.p_XAttackNum && this->p_XDefenseNum == pkmn.p_XDefenseNum)) return false;
 
 	return true;
 }

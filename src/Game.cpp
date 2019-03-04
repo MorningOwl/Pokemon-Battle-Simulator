@@ -10,27 +10,14 @@
 
 using namespace std;
 
-class Player
-{
-	public:
-		int y, x;
-		int potionNum = 1, etherNum = 1;
-		int XAttackNum = 1, XDefenseNum = 1;
-		int pokeBallNum = 5;
-
-		Player(int y, int  x) :x(x), y(y) {};
-};
-
 Player player(16, 30);
 char key = 'x';
-int numPkmn = 1;
 
-GameMode mode = MENU;
-Pokemon pkmn, foe;
-Pokemon Pkmn[7], rival;
+GameMode mode;
+Pokemon foe;
+Pokemon rival;
 
 int det, det1, det2;
-bool battleEnd = false;
 
 void ClassicMode();
 void EndlessMode();
@@ -44,6 +31,7 @@ int main()
 	{
 		while (true)
 		{
+			mode = MENU;
 			cout << "************************\n";
 			cout << "POKEMON BATTLE SIMULATOR\n";
 			cout << "************************\n\n";
@@ -57,12 +45,10 @@ int main()
 		switch (det)
 		{
 			case 1:
-				mode = CLASSIC;
 				ClassicMode();
 				break;
 
 			case 2:
-				mode = ENDLESS;
 				EndlessMode();
 				break;
 
@@ -72,7 +58,6 @@ int main()
 				break;
 
 			case 1111:
-				mode = CAMPAIGN;
 				CampaignMode();
 		}
 	}
@@ -91,206 +76,91 @@ bool win(Pokemon foe)
 //MENUS
 int fight(Pokemon &foe)
 {
-	switch (pkmn.p_numMoves)
+	bool temp;
+
+	while (true)
 	{
-		case 1:
-			while (true)
-			{
-				logMove(pkmn, pkmn.p_move[1].m_name, 1);
-				cout << "\n2.Info...\t\t3.Back\n\n";
-				cin >> det;
-				system("cls");
-				if (det >= 1 && det <= 3) break;
-			}
+		for (int i = 1; i <= player.pkmn.p_numMoves; i++)
+		{
+			temp = (i % 2 == 0) ? true : false;
+			logMove(player.pkmn, player.pkmn.p_move[i].m_name, i, temp);
+		}
 
-			switch (det)
-			{
-				case 1:
-					pkmn.move1(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 2:
-					logMoveInfo(pkmn, pkmn.p_move[1]);
-					next;
-			}
-			return 0;
-
-		case 2:
-			while (true)
-			{
-				logMove(pkmn, pkmn.p_move[1].m_name, 1, false);
-				cout << "2." << pkmn.p_move[2].m_name << " (" << pkmn.p_move[2].m_PP << "/" << pkmn.p_move[2].m_PPMax << ")\n\n";
-				cout << "3.Info...\t\t4.Back\n\n";
-				cin >> det;
-				system("cls");
-				if (det >= 1 && det <= 4) break;
-			}
-
-			switch (det)
-			{
-				case 1:
-					pkmn.move1(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 2:
-					pkmn.move2(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 3:
-					logMoveInfo(pkmn, pkmn.p_move[1]);
-					logMoveInfo(pkmn, pkmn.p_move[2]);
-					next;
-			}
-			return 0;
-
-		case 3:
-			while (true)
-			{
-				logMove(pkmn, pkmn.p_move[1].m_name, 1, false);
-				cout << "2." << pkmn.p_move[2].m_name << " (" << pkmn.p_move[2].m_PP << "/" << pkmn.p_move[2].m_PPMax << ")\n";
-				logMove(pkmn, pkmn.p_move[3].m_name, 3); cout << endl;
-				cout << "4.Info...\t\t5.Back\n\n";
-				cin >> det;
-				system("cls");
-				if (det >= 1 && det <= 5) break;
-			}
-
-			switch (det)
-			{
-				case 1:
-					pkmn.move1(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 2:
-					pkmn.move2(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 3:
-					pkmn.move3(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 4:
-					logMoveInfo(pkmn, pkmn.p_move[1]);
-					logMoveInfo(pkmn, pkmn.p_move[2]);
-					logMoveInfo(pkmn, pkmn.p_move[3]);
-					next;
-			}
-			return 0;
-
-		case 4:
-			while (true)
-			{
-				logMove(pkmn, pkmn.p_move[1].m_name, 1, false);
-				cout << "2." << pkmn.p_move[2].m_name << " (" << pkmn.p_move[2].m_PP << "/" << pkmn.p_move[2].m_PPMax << ")\n";
-				logMove(pkmn, pkmn.p_move[3].m_name, 3, false);
-				cout << "4." << pkmn.p_move[4].m_name << " (" << pkmn.p_move[4].m_PP << "/" << pkmn.p_move[4].m_PPMax << ")\n\n";
-				cout << "5.Info...6.Back\n\n";
-				cin >> det;
-				system("cls");
-				if (det >= 1 && det <= 6) break;
-			}
-
-			switch (det)
-			{
-				case 1:
-					pkmn.move1(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 2:
-					pkmn.move2(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 3:
-					pkmn.move3(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 4:
-					pkmn.move4(pkmn, foe);
-					if (win(foe))
-					{
-						if (mode == ENDLESS)
-							return 2;
-						return-1;
-					}
-					return 1;
-
-				case 5:
-					logMoveInfo(pkmn, pkmn.p_move[1]);
-					logMoveInfo(pkmn, pkmn.p_move[2]);
-					logMoveInfo(pkmn, pkmn.p_move[3]);
-					logMoveInfo(pkmn, pkmn.p_move[4]);
-					next;
-			}
-			return 0;
+		if (player.pkmn.p_numMoves % 2 != 0) cout << endl;
+		cout << endl << player.pkmn.p_numMoves + 1 << ".Info...\t\t";
+		cout << player.pkmn.p_numMoves + 2 << ".Back\n\n";
+		cin >> det;
+		system("cls");
+		if (det >= 1 && det <= player.pkmn.p_numMoves) break;
 	}
+
+	for (int i = 1; i <= player.pkmn.p_numMoves; i++)
+		if (det == i)
+		{
+			player.pkmn.move(i, player.pkmn, foe);
+			if (win(foe))
+			{
+				if (mode == ENDLESS)
+					return 2;
+				return-1;
+			}
+			return 1;
+		}
+
+	if (det == player.pkmn.p_numMoves + 1)
+	{
+		for (int i = 1; i <= player.pkmn.p_numMoves; i++)
+			logMoveInfo(player.pkmn, player.pkmn.p_move[i]);
+		next;
+	}
+
+	return 0;
+}
+
+bool bag()
+{
+	while (true)
+	{
+		for (int i = 1; i <= player.numItems; i++)
+			cout << i << "." << player.bag[i].i_name << " (x" << player.bag[i].i_num << ")\n";
+
+		cout << endl << player.numItems + 1 << ".Info...\n";
+		cout << player.numItems + 2 << ".Back\n\n";
+		cin >> det;
+		system("cls");
+		if (det >= 1 && det <= player.numItems + 2) break;
+	}
+
+	for (int i = 1; i <= player.numItems; i++)
+		if (det == i)
+		{
+			if (player.item(i, foe))
+				return true;
+			break;
+		}
+
+	if (det == player.numItems + 1)
+	{
+		for (int i = 1; i <= player.numItems; i++)
+			player.logItemInfo(player.bag[i]);
+		next;
+	}
+
+	return false;
 }
 
 void stats()
 {
-	cout << pkmn.p_name << endl;
-	if (pkmn.p_type2 == NONE) cout << pkmn.p_type1Name << endl;
-	else cout << pkmn.p_type1Name << ", " << pkmn.p_type2Name << endl;
-	cout << "Level: " << pkmn.p_level << endl;
-	cout << "Health: " << pkmn.p_HP << endl;
-	cout << "Attack: " << pkmn.p_attack << endl;
-	cout << "Defense: " << pkmn.p_defense << endl;
-	cout << "Sp. Atk: " << pkmn.p_spAttack << endl;
-	cout << "Sp. Def: " << pkmn.p_spDefense << endl;
-	cout << "Speed: " << pkmn.p_speed << "\n\n";
+	cout << player.pkmn.p_name << endl;
+	if (player.pkmn.p_type2 == NONE) cout << player.pkmn.p_type1Name << endl;
+	else cout << player.pkmn.p_type1Name << ", " << player.pkmn.p_type2Name << endl;
+	cout << "Level: " << player.pkmn.p_level << endl;
+	cout << "Health: " << player.pkmn.p_HP << endl;
+	cout << "Attack: " << player.pkmn.p_attack << endl;
+	cout << "Defense: " << player.pkmn.p_defense << endl;
+	cout << "Sp. Atk: " << player.pkmn.p_spAttack << endl;
+	cout << "Sp. Def: " << player.pkmn.p_spDefense << endl;
+	cout << "Speed: " << player.pkmn.p_speed << "\n\n";
 	next;
 }
 
@@ -298,262 +168,18 @@ bool switchPokemon()
 {
 	while (true)
 	{
-		for (int i = 1; i <= numPkmn; i++)
-			cout << i << "." << Pkmn[i].p_name << endl;
-		cout << endl << numPkmn + 1 << ".Back\n\n";
+		for (int i = 1; i <= player.numPkmn; i++)
+			cout << i << "." << player.Pkmn[i].p_name << endl;
+		cout << endl << player.numPkmn + 1 << ".Back\n\n";
 		cin >> det;
 		system("cls");
-		if (det == numPkmn + 1) return false;
-		if (det >= 1 && det <= numPkmn) break;
+		if (det == player.numPkmn + 1) return false;
+		if (det >= 1 && det <= player.numPkmn) break;
 	}
 
-	Pkmn[0] = pkmn;
-	pkmn = Pkmn[det];
+	player.Pkmn[0] = player.pkmn;
+	player.pkmn = player.Pkmn[det];
 	return true;
-}
-
-//ITEMS
-bool potion()
-{
-	if (player.potionNum <= 0)
-	{
-		cout << "Out of potions!\n\n", next;
-		return false;
-	}
-
-	if (pkmn.p_HP == pkmn.p_HPMax)
-	{
-		cout << "HP is already full!\n\n", next;
-		return false;
-	}
-
-	cout << "Used a potion!\n\n", next;
-	player.potionNum--;
-
-	if (pkmn.p_HP < pkmn.p_HP - 20)
-		pkmn.p_HP += 20;
-	else
-		pkmn.p_HP = pkmn.p_HPMax;
-
-	return true;
-}
-
-bool ether()
-{
-	if (player.etherNum <= 0)
-	{
-		cout << "Out of ethers!\n\n", next;
-		return false;
-	}
-
-	while (true)
-	{
-		cout << "Choose a move to use an ether on:\n\n";
-		cout << "1." << pkmn.p_move[1].m_name << " (" << pkmn.p_move[1].m_PP << "/" << pkmn.p_move[1].m_PPMax << ")\t\t";
-		cout << "2." << pkmn.p_move[2].m_name << " (" << pkmn.p_move[2].m_PP << "/" << pkmn.p_move[2].m_PPMax << ")\n\n";
-		cout << "3.Back\n\n";
-		cin >> det;
-		system("cls");
-		if (det == 3) return false;
-		if (det == 1 || det == 2) break;
-	}
-
-	for (int i = 1; i <= pkmn.p_numMoves; i++)
-	{
-		if (det == i)
-		{
-			if (pkmn.p_move[i].m_PP == pkmn.p_move[i].m_PPMax)
-			{
-				cout << "PP is already full for that move!\n\n", next;
-				return false;
-			}
-
-			else
-			{
-				cout << "Used an ether!\n\n", next;
-				player.etherNum--;
-				
-				if (pkmn.p_move[i].m_PP < pkmn.p_move[i].m_PPMax - 5)
-					pkmn.p_move[i].m_PP += 10;
-				else
-					pkmn.p_move[i].m_PP = pkmn.p_move[i].m_PPMax;
-
-				return true;
-			}
-		}
-	}
-}
-
-bool XAttack()
-{
-	if (player.XAttackNum <= 0)
-	{
-		cout << "Out of X Attacks!\n\n", next;
-		return false;
-	}
-
-	cout << "Used an X Attack!\n\n", next;
-	player.XAttackNum--;
-
-	if (pkmn.p_attackLevel >= 6)
-	{
-		cout << pkmn.p_name << " 's attack won't go any higher!\n\n", next;
-		return true;
-	}
-
-	det = (pkmn.p_attackLevel == 5) ? 1 : 2;
-	pkmn.changeStat(pkmn, "attack", det);
-	return true;
-}
-
-bool XDefense()
-{
-	if (player.XDefenseNum <= 0)
-	{
-		cout << "Out of X Defenses!\n\n", next;
-		return false;
-	}
-
-	cout << "Used an X Defense!\n\n", next;
-	player.XDefenseNum--;
-
-	if (pkmn.p_defenseLevel >= 6)
-	{
-		cout << pkmn.p_name << " 's defense won't go any higher!\n\n", next;
-		return true;
-	}
-
-	det = (pkmn.p_defenseLevel == 5) ? 1 : 2;
-	pkmn.changeStat(pkmn, "defense", det);
-	return true;
-}
-
-bool pokeBall()
-{
-	if (player.pokeBallNum <= 0)
-	{
-		cout << "Out of Poke Balls!\n\n", next;
-		return false;
-	}
-
-	cout << "Used a Poke Ball!\n\n", next;
-	player.pokeBallNum--;
-
-	cout << "1..."; Sleep(1000); cout << "2..."; Sleep(1000); cout << "3..."; Sleep(1000);
-	system("cls");
-	cout << "Captured wild " << foe.p_name << "!\n\n", next;
-
-	while (true)
-	{
-		cout << "Would you like to give a nickname to your new " << foe.p_name << "?\n\n";
-		cout << "1.Yes\n2.No\n\n";
-		cin >> det;
-		system("cls");
-		if (det == 1 || det == 2) break;
-	}
-
-	/*if (det == 1)
-	{
-		char name[20];
-
-		while (true)
-		{
-			cout << "Enter nickname:\n\n";
-			cin.ignore();
-			cin.getline(name, 20);
-			foe.p_name = name;
-			cout << "\nIs this name correct?\n\n1.Yes\n2.No\n\n";
-			cin >> det;
-			system("cls");
-			if (det == 1) break;
-		}
-	}*/
-
-	numPkmn++;
-	Pkmn[numPkmn] = foe;
-	battleEnd = true;
-	return true;
-}
-
-bool bag()
-{
-	while (true)
-	{
-		cout << "1.Potion (x" << player.potionNum << ")\n";
-		cout << "2.Ether (x" << player.etherNum << ")\n";
-		cout << "3.X Attack (x" << player.XAttackNum << ")\n";
-		cout << "4.X Defense (x" << player.XDefenseNum << ")\n";
-
-		if (mode == CAMPAIGN)
-		{
-			cout << "5.Poke Ball (x" << player.pokeBallNum << ")\n\n";
-			cout << "6.Info...\n";
-			cout << "7.Back\n\n";
-			cin >> det;
-			system("cls");
-			if (det >= 1 && det <= 7) break;
-		}
-
-		else
-		{
-			cout << "\n5.Info...\n";
-			cout << "6.Back\n\n";
-			cin >> det;
-			system("cls");
-			if (det >= 1 && det <= 6) break;
-		}
-
-	}
-
-	switch (det)
-	{
-		case 1:
-			if (potion())
-				return true;
-			return false;
-
-		case 2:
-			if (ether())
-				return true;
-			return false;
-
-		case 3:
-			if (XAttack())
-				return true;
-			return false;
-
-		case 4:
-			if (XDefense())
-				return true;
-			return false;
-
-		case 5:
-			if (mode == CAMPAIGN && pokeBall())
-				return true;
-
-			cout << "Potion:    A spray-type medicine for treating wounds. It can be used to restore\n           20 HP to an injured Pokemon.\n\n";
-			cout << "Ether:     This medicine can restore 10 PP to a single selected move that has been\n           learned by a Pokemon.\n\n";
-			cout << "X Attack:  An item that sharply boosts the Attack stat of a Pokemon during battle.\n           It wears off once the Pokemon is withdrawn.\n\n";
-			cout << "X Defense: An item that sharply boosts the Defense stat of a Pokemon during battle.\n           It wears off once the Pokemon is withdrawn.\n\n";
-			next;
-			return false;
-
-		case 6:
-			if (mode == CAMPAIGN)
-			{
-				cout << "Potion:    A spray-type medicine for treating wounds. It can be used to restore\n           20 HP to an injured Pokemon.\n\n";
-				cout << "Ether:     This medicine can restore 10 PP to a single selected move that has been\n           learned by a Pokemon.\n\n";
-				cout << "X Attack:  An item that sharply boosts the Attack stat of a Pokemon during battle.\n           It wears off once the Pokemon is withdrawn.\n\n";
-				cout << "X Defense: An item that sharply boosts the Defense stat of a Pokemon during battle.\n           It wears off once the Pokemon is withdrawn.\n\n";
-				cout << "Poke Ball: A device for catching wild Pokemon. It is thrown like a ball at a Pokemon,\n           comfortably encapsuling its target.\n\n";
-				next;
-			}
-
-			return false;
-
-		case 7:
-			return false;
-	}
 }
 
 //TURNS
@@ -562,10 +188,10 @@ int playerTurn(Pokemon &foe)
 	while (true)
 	{
 		cout << "******************************\n";
-		cout << "Using: "; logName(pkmn);
+		cout << "Using: "; logName(player.pkmn);
 		cout << "Foe:   "; logName(foe);
 		cout << "******************************\n\n";
-		cout << "What will " << pkmn.p_name << " do?\n\n";
+		cout << "What will " << player.pkmn.p_name << " do?\n\n";
 		if (mode == CAMPAIGN) cout << "1.Fight\t\t2.Bag\n3.Pokemon\t4.Run\n\n";
 		else cout << "1.Fight\t\t2.Bag\n3.Stats\t\t4.Run\n\n";
 
@@ -607,73 +233,73 @@ int foeTurn(Pokemon &foe)
 	switch (foe.p_numMoves)
 	{
 		case 1:
-			foe.move1(foe, pkmn);
+			foe.move(1, foe, player.pkmn);
 			break;
 
 		case 2:
 			if ((foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE) ||
 				(foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS))
-				if (prob < 11) foe.move1(foe, pkmn); else foe.move2(foe, pkmn);
+				if (prob < 11) foe.move(1, foe, player.pkmn); else foe.move(2, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS)
-				if (prob < 15) foe.move1(foe, pkmn); else foe.move2(foe, pkmn);
+				if (prob < 15) foe.move(1, foe, player.pkmn); else foe.move(2, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE)
-				if (prob < 7) foe.move1(foe, pkmn); else foe.move2(foe, pkmn);
+				if (prob < 7) foe.move(1, foe, player.pkmn); else foe.move(2, foe, player.pkmn);
 			break;
 
 		case 3:
 			if ((foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE) ||
 				(foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS))
-				if (prob < 8) foe.move1(foe, pkmn); else if (prob < 15) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
+				if (prob < 8) foe.move(1, foe, player.pkmn); else if (prob < 15) foe.move(2, foe, player.pkmn); else foe.move(3, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS)
-				if (prob < 13) foe.move1(foe, pkmn); else if (prob < 17) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
+				if (prob < 13) foe.move(1, foe, player.pkmn); else if (prob < 17) foe.move(2, foe, player.pkmn); else foe.move(3, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS)
-				if (prob < 5) foe.move1(foe, pkmn); else if (prob < 17) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
+				if (prob < 5) foe.move(1, foe, player.pkmn); else if (prob < 17) foe.move(2, foe, player.pkmn); else foe.move(3, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE)
-				if (prob < 5) foe.move1(foe, pkmn); else if (prob < 9) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
+				if (prob < 5) foe.move(1, foe, player.pkmn); else if (prob < 9) foe.move(2, foe, player.pkmn); else foe.move(3, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE)
-				if (prob < 5) foe.move1(foe, pkmn); else if (prob < 13) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
+				if (prob < 5) foe.move(1, foe, player.pkmn); else if (prob < 13) foe.move(2, foe, player.pkmn); else foe.move(3, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE)
-				if (prob < 9) foe.move1(foe, pkmn); else if (prob < 13) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
+				if (prob < 9) foe.move(1, foe, player.pkmn); else if (prob < 13) foe.move(2, foe, player.pkmn); else foe.move(3, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS)
-				if (prob < 9) foe.move1(foe, pkmn); else if (prob < 17) foe.move2(foe, pkmn); else foe.move3(foe, pkmn);
+				if (prob < 9) foe.move(1, foe, player.pkmn); else if (prob < 17) foe.move(2, foe, player.pkmn); else foe.move(3, foe, player.pkmn);
 			break;
 
 		case 4:
 			if ((foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == DAMAGE) ||
 				(foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS))
-				if (prob < 6) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 16) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 6) foe.move(1, foe, player.pkmn); else if (prob < 11) foe.move(2, foe, player.pkmn); else if (prob < 16) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
-				if (prob < 12) foe.move1(foe, pkmn); else if (prob < 15) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 12) foe.move(1, foe, player.pkmn); else if (prob < 15) foe.move(2, foe, player.pkmn); else if (prob < 18) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
-				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 15) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 4) foe.move(1, foe, player.pkmn); else if (prob < 15) foe.move(2, foe, player.pkmn); else if (prob < 18) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS)
-				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 7) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 4) foe.move(1, foe, player.pkmn); else if (prob < 7) foe.move(2, foe, player.pkmn); else if (prob < 18) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == DAMAGE)
-				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 7) foe.move2(foe, pkmn); else if (prob < 10) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 4) foe.move(1, foe, player.pkmn); else if (prob < 7) foe.move(2, foe, player.pkmn); else if (prob < 10) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if ((foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == DAMAGE) ||
 				(foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == DAMAGE) ||
 				(foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == DAMAGE) ||
 				(foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS))
-				if (prob < 6) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 16) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 6) foe.move(1, foe, player.pkmn); else if (prob < 11) foe.move(2, foe, player.pkmn); else if (prob < 16) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == STATUS)
-				if (prob < 8) foe.move1(foe, pkmn); else if (prob < 15) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 8) foe.move(1, foe, player.pkmn); else if (prob < 15) foe.move(2, foe, player.pkmn); else if (prob < 18) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS)
-				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 4) foe.move(1, foe, player.pkmn); else if (prob < 11) foe.move(2, foe, player.pkmn); else if (prob < 18) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == DAMAGE)
-				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 4) foe.move(1, foe, player.pkmn); else if (prob < 11) foe.move(2, foe, player.pkmn); else if (prob < 18) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS)
-				if (prob < 8) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 8) foe.move(1, foe, player.pkmn); else if (prob < 11) foe.move(2, foe, player.pkmn); else if (prob < 18) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == DAMAGE)
-				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 13) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 4) foe.move(1, foe, player.pkmn); else if (prob < 11) foe.move(2, foe, player.pkmn); else if (prob < 13) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == STATUS && foe.p_move[2].m_effect == DAMAGE && foe.p_move[3].m_effect == DAMAGE && foe.p_move[4].m_effect == STATUS)
-				if (prob < 4) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 18) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 4) foe.move(1, foe, player.pkmn); else if (prob < 11) foe.move(2, foe, player.pkmn); else if (prob < 18) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 			else if (foe.p_move[1].m_effect == DAMAGE && foe.p_move[2].m_effect == STATUS && foe.p_move[3].m_effect == STATUS && foe.p_move[4].m_effect == DAMAGE)
-				if (prob < 8) foe.move1(foe, pkmn); else if (prob < 11) foe.move2(foe, pkmn); else if (prob < 14) foe.move3(foe, pkmn); else foe.move4(foe, pkmn);
+				if (prob < 8) foe.move(1, foe, player.pkmn); else if (prob < 11) foe.move(2, foe, player.pkmn); else if (prob < 14) foe.move(3, foe, player.pkmn); else foe.move(4, foe, player.pkmn);
 	}
 
-	if (pkmn.p_HP <= 0)
+	if (player.pkmn.p_HP <= 0)
 	{
-		cout << pkmn.p_name << " fainted!\n\n", next;
+		cout << player.pkmn.p_name << " fainted!\n\n", next;
 		return 1;
 	}
 
@@ -683,6 +309,8 @@ int foeTurn(Pokemon &foe)
 //GAME MODES
 void ClassicMode()
 {
+	mode = CLASSIC;
+	player.initPlayer(mode);
 	while (true)
 	{
 		cout << "************************\n";
@@ -700,19 +328,19 @@ void ClassicMode()
 	switch (det)
 	{
 		case 1:
-			pkmn.initPokemon(BULBASAUR);
+			player.pkmn.initPokemon(BULBASAUR);
 			if (prob == 1) foe.initPokemon(CHARMANDER);
 			else foe.initPokemon(SQUIRTLE);
 			break;
 
 		case 2:
-			pkmn.initPokemon(CHARMANDER);
+			player.pkmn.initPokemon(CHARMANDER);
 			if (prob == 1) foe.initPokemon(BULBASAUR);
 			else foe.initPokemon(SQUIRTLE);
 			break;
 
 		case 3:
-			pkmn.initPokemon(SQUIRTLE);
+			player.pkmn.initPokemon(SQUIRTLE);
 			if (prob == 1) foe.initPokemon(BULBASAUR);
 			else foe.initPokemon(CHARMANDER);
 	}
@@ -730,13 +358,13 @@ void ClassicMode()
 
 		switch (det)
 		{
-			case 1: pkmn.initPokemon(BULBASAUR); break;
-			case 2: pkmn.initPokemon(CHARMANDER); break;
-			case 3: pkmn.initPokemon(SQUIRTLE); break;
-			case 4: pkmn.initPokemon(PIDGEY); break;
-			case 5: pkmn.initPokemon(RATTATA); break;
-			case 6: pkmn.initPokemon(SPEAROW); break;
-			case 7: pkmn.initPokemon(ODDISH); break;
+			case 1: player.pkmn.initPokemon(BULBASAUR); break;
+			case 2: player.pkmn.initPokemon(CHARMANDER); break;
+			case 3: player.pkmn.initPokemon(SQUIRTLE); break;
+			case 4: player.pkmn.initPokemon(PIDGEY); break;
+			case 5: player.pkmn.initPokemon(RATTATA); break;
+			case 6: player.pkmn.initPokemon(SPEAROW); break;
+			case 7: player.pkmn.initPokemon(ODDISH); break;
 		}
 
 		while (true)
@@ -765,12 +393,12 @@ void ClassicMode()
 		if (playerTurn(foe) == -1) break;
 		if (foeTurn(foe)) break;
 	}
-
-	mode = MENU;
 }
 
 void EndlessMode()
 {
+	mode = ENDLESS;
+	player.initPlayer(mode);
 	int count = 0;
 
 	while (true)
@@ -786,9 +414,9 @@ void EndlessMode()
 
 	switch (det)
 	{
-		case 1: pkmn.initPokemon(BULBASAUR); break;
-		case 2: pkmn.initPokemon(CHARMANDER); break;
-		case 3: pkmn.initPokemon(SQUIRTLE);
+		case 1: player.pkmn.initPokemon(BULBASAUR); break;
+		case 2: player.pkmn.initPokemon(CHARMANDER); break;
+		case 3: player.pkmn.initPokemon(SQUIRTLE);
 	}
 
 	while (true)
@@ -829,7 +457,6 @@ void EndlessMode()
 				if (det1 == 1)
 				{
 					cout << "You defeated " << count << " Pokemon!\n\n", next;
-					mode = MENU;
 					return;
 				}
 			}
@@ -838,7 +465,6 @@ void EndlessMode()
 			{
 				cout << "You lost!\n\n", next;
 				cout << "You defeated " << count << " Pokemon!\n\n", next;
-				mode = MENU;
 				return;
 			}
 		}
@@ -857,12 +483,12 @@ void CampaignTest()
 
 	switch (det)
 	{
-		case 1: Pkmn[1].initPokemon(BULBASAUR); rival.initPokemon(CHARMANDER); break;
-		case 2: Pkmn[1].initPokemon(CHARMANDER); rival.initPokemon(SQUIRTLE); break;
-		case 3: Pkmn[1].initPokemon(SQUIRTLE); rival.initPokemon(BULBASAUR);
+		case 1: player.Pkmn[1].initPokemon(BULBASAUR); rival.initPokemon(CHARMANDER); break;
+		case 2: player.Pkmn[1].initPokemon(CHARMANDER); rival.initPokemon(SQUIRTLE); break;
+		case 3: player.Pkmn[1].initPokemon(SQUIRTLE); rival.initPokemon(BULBASAUR);
 	}
 
-	pkmn = Pkmn[1];
+	player.pkmn = player.Pkmn[1];
 
 	cout << "Your rival chose " << rival.p_name << "!\n\n", next;
 
@@ -872,7 +498,7 @@ void CampaignTest()
 		if (foeTurn(rival)) break;
 	}
 
-	pkmn.refresh();
+	player.pkmn.refresh();
 	srand(time(0));
 
 	for (int i = 0; i < 3; i++)
@@ -909,6 +535,9 @@ void WildPokemonBattle();
 
 void CampaignMode()
 {
+	mode = CAMPAIGN;
+	player.initPlayer(mode);
+
 	while (true)
 	{
 		cout << "Choose your first Pokemon:\n\n1.BULBASAUR\n2.CHARMANDER\n3.SQUIRTLE\n\n";
@@ -919,12 +548,12 @@ void CampaignMode()
 
 	switch (det)
 	{
-		case 1: pkmn.initPokemon(BULBASAUR); break;
-		case 2: pkmn.initPokemon(CHARMANDER); break;
-		case 3: pkmn.initPokemon(SQUIRTLE);
+		case 1: player.pkmn.initPokemon(BULBASAUR); break;
+		case 2: player.pkmn.initPokemon(CHARMANDER); break;
+		case 3: player.pkmn.initPokemon(SQUIRTLE);
 	}
 
-	Pkmn[1] = pkmn;
+	player.Pkmn[1] = player.pkmn;
 
 	while (true)
 	{
@@ -952,21 +581,15 @@ void displayMap()
 			else if (map[y][x] == 4)
 				cout << "#";
 
+			else if (map[y][x] == 6)
+				cout << "P";
+
 			else if (map[y][x] == 0)
 				cout << " ";
 		}
 
 		cout << endl;
 	}
-}
-
-void CheckForWildPokemon()
-{
-	srand(time(0));
-	int prob = 1 + rand() % 4;
-	
-	if (map[player.y][player.x] == 4 && prob == 1)
-		WildPokemonBattle();
 }
 
 void getUserInput()
@@ -998,6 +621,43 @@ void getUserInput()
 	}
 
 	CheckForWildPokemon();
+
+	if (map[player.y][player.x] == 6)
+	{
+		cout << "You found a potion!\n\n", next;
+		for (int i = 1; i <= player.numItems; i++)
+			if (player.bag[i].i_ID == POTION)
+			{
+				player.potions = true;
+				break;
+			}
+			
+		if (!player.potions)
+		{
+			player.numItems++;
+			player.bag[player.numItems].i_ID = POTION;
+			player.bag[player.numItems].i_name = "Potion";
+			player.bag[player.numItems].i_num = 1;
+			player.potions = true;
+		}
+
+		else
+			for (int i = 1; i <= player.numItems; i++)
+				if (player.bag[i].i_ID == POTION)
+				{
+					player.bag[i].i_num++;
+					break;
+				}
+	}
+}
+
+void CheckForWildPokemon()
+{
+	srand(time(0));
+	int prob = 1 + rand() % 4;
+
+	if (map[player.y][player.x] == 4 && prob == 1)
+		WildPokemonBattle();
 }
 
 void WildPokemonBattle()
@@ -1016,7 +676,7 @@ void WildPokemonBattle()
 	while (true)
 	{
 		if (playerTurn(foe) == -1) break;
-		if (battleEnd) { battleEnd = false; break; }
+		if (player.battleEnd) { player.battleEnd = false; break; }
 		cout << "Wild ";
 		if (foeTurn(foe)) break;
 	}

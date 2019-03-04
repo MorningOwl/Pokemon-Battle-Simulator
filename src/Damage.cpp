@@ -83,7 +83,7 @@ double Pokemon::typeDamage(Pokemon &foe, Type moveType)
 
 double Pokemon::modifier(Pokemon &foe, Type moveType)
 {
-	return criticalHit() * random() * this->stab(moveType) * this->typeDamage(foe, moveType);
+	return random() * this->stab(moveType) * this->typeDamage(foe, moveType);
 }
 
 double Pokemon::damage(Pokemon &foe, int power, Type moveType, Effect moveEffect)

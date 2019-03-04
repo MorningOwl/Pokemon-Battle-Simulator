@@ -5,105 +5,105 @@
 
 using namespace std;
 
-
+//POKEMON
 void Pokemon::initPokemon(PID Name)
 {
 	switch (Name)
 	{
-	case BULBASAUR:
-		this->p_name = "BULBASAUR";
-		this->p_type1 = GRASS;
-		this->p_type1Name = "Grass";
-		this->p_type2 = POISON;
-		this->p_type2Name = "Poison";
-		this->p_HP = 19;
-		this->p_attack = 8;
-		this->p_defense = 8;
-		this->p_spAttack = 9;
-		this->p_spDefense = 9;
-		this->p_speed = 8;
-		this->p_move[1].m_ID = GROWL;
-		this->p_move[2].m_ID = TACKLE;
-		break;
+		case BULBASAUR:
+			this->p_name = "BULBASAUR";
+			this->p_type1 = GRASS;
+			this->p_type1Name = "Grass";
+			this->p_type2 = POISON;
+			this->p_type2Name = "Poison";
+			this->p_HP = 19;
+			this->p_attack = 8;
+			this->p_defense = 8;
+			this->p_spAttack = 9;
+			this->p_spDefense = 9;
+			this->p_speed = 8;
+			this->p_move[1].m_ID = GROWL;
+			this->p_move[2].m_ID = TACKLE;
+			break;
 
-	case CHARMANDER:
-		this->p_name = "CHARMANDER";
-		this->p_type1 = FIRE;
-		this->p_type1Name = "Fire";
-		this->p_type2 = _;
-		this->p_HP = 18;
-		this->p_attack = 9;
-		this->p_defense = 8;
-		this->p_spAttack = 9;
-		this->p_spDefense = 9;
-		this->p_speed = 9;
-		this->p_move[1].m_ID = SCRATCH;
-		this->p_move[2].m_ID = GROWL;
-		break;
+		case CHARMANDER:
+			this->p_name = "CHARMANDER";
+			this->p_type1 = FIRE;
+			this->p_type1Name = "Fire";
+			this->p_type2 = _;
+			this->p_HP = 18;
+			this->p_attack = 9;
+			this->p_defense = 8;
+			this->p_spAttack = 9;
+			this->p_spDefense = 9;
+			this->p_speed = 9;
+			this->p_move[1].m_ID = SCRATCH;
+			this->p_move[2].m_ID = GROWL;
+			break;
 
-	case SQUIRTLE:
-		this->p_name = "SQUIRTLE";
-		this->p_type1 = WATER;
-		this->p_type1Name = "Water";
-		this->p_type2 = _;
-		this->p_HP = 19;
-		this->p_attack = 8;
-		this->p_defense = 9;
-		this->p_spAttack = 9;
-		this->p_spDefense = 9;
-		this->p_speed = 8;
-		this->p_move[1].m_ID = TACKLE;
-		this->p_move[2].m_ID = TAILWHIP;
-		break;
+		case SQUIRTLE:
+			this->p_name = "SQUIRTLE";
+			this->p_type1 = WATER;
+			this->p_type1Name = "Water";
+			this->p_type2 = _;
+			this->p_HP = 19;
+			this->p_attack = 8;
+			this->p_defense = 9;
+			this->p_spAttack = 9;
+			this->p_spDefense = 9;
+			this->p_speed = 8;
+			this->p_move[1].m_ID = TACKLE;
+			this->p_move[2].m_ID = TAILWHIP;
+			break;
 
-	case PIDGEY:
-		this->p_name = "PIDGEY";
-		this->p_type1 = NORMAL;
-		this->p_type1Name = "Normal";
-		this->p_type2 = FLYING;
-		this->p_type2Name = "Flying";
-		this->p_HP = 19;
-		this->p_attack = 8;
-		this->p_defense = 8;
-		this->p_spAttack = 7;
-		this->p_spDefense = 7;
-		this->p_speed = 7;
-		this->p_move[1].m_ID = TACKLE;
-		this->p_move[2].m_ID = SANDATTACK;
-		this->p_move[3].m_ID = GUST;
-		this->p_numMoves = 3;
-		break;
+		case PIDGEY:
+			this->p_name = "PIDGEY";
+			this->p_type1 = NORMAL;
+			this->p_type1Name = "Normal";
+			this->p_type2 = FLYING;
+			this->p_type2Name = "Flying";
+			this->p_HP = 19;
+			this->p_attack = 8;
+			this->p_defense = 8;
+			this->p_spAttack = 7;
+			this->p_spDefense = 7;
+			this->p_speed = 7;
+			this->p_move[1].m_ID = TACKLE;
+			this->p_move[2].m_ID = SANDATTACK;
+			this->p_move[3].m_ID = GUST;
+			this->p_numMoves = 3;
+			break;
 
-	case RATTATA:
-		this->p_name = "RATTATA";
-		this->p_type1 = NORMAL;
-		this->p_type1Name = "Normal";
-		this->p_type2 = _;
-		this->p_HP = 18;
-		this->p_attack = 9;
-		this->p_defense = 7;
-		this->p_spAttack = 6;
-		this->p_spDefense = 7;
-		this->p_speed = 10;
-		this->p_move[1].m_ID = TACKLE;
-		this->p_move[2].m_ID = TAILWHIP;
-		break;
+		case RATTATA:
+			this->p_name = "RATTATA";
+			this->p_type1 = NORMAL;
+			this->p_type1Name = "Normal";
+			this->p_type2 = _;
+			this->p_HP = 18;
+			this->p_attack = 9;
+			this->p_defense = 7;
+			this->p_spAttack = 6;
+			this->p_spDefense = 7;
+			this->p_speed = 10;
+			this->p_move[1].m_ID = TACKLE;
+			this->p_move[2].m_ID = TAILWHIP;
+			break;
 
-	case SPEAROW:
-		this->p_name = "SPEAROW";
-		this->p_type1 = NORMAL;
-		this->p_type1Name = "Normal";
-		this->p_type2 = FLYING;
-		this->p_type2Name = "Flying";
-		this->p_HP = 19;
-		this->p_attack = 9;
-		this->p_defense = 7;
-		this->p_spAttack = 7;
-		this->p_spDefense = 7;
-		this->p_speed = 10;
-		this->p_move[1].m_ID = PECK;
-		this->p_move[2].m_ID = GROWL;
-		break;
+		case SPEAROW:
+			this->p_name = "SPEAROW";
+			this->p_type1 = NORMAL;
+			this->p_type1Name = "Normal";
+			this->p_type2 = FLYING;
+			this->p_type2Name = "Flying";
+			this->p_HP = 19;
+			this->p_attack = 9;
+			this->p_defense = 7;
+			this->p_spAttack = 7;
+			this->p_spDefense = 7;
+			this->p_speed = 10;
+			this->p_move[1].m_ID = PECK;
+			this->p_move[2].m_ID = GROWL;
+			break;
 
 		case ODDISH:
 			this->p_name = "ODDISH";
@@ -211,16 +211,16 @@ void Pokemon::initMoves()
 		this->p_move[i].m_PPMax = this->p_move[i].m_PP;
 }
 
-void Pokemon::move1(Pokemon &pkmn, Pokemon &foe)
+void Pokemon::move(int moveNum, Pokemon &pkmn, Pokemon &foe)
 {
-	if (this->p_move[1].m_PP <= 0)
+	if (this->p_move[moveNum].m_PP <= 0)
 	{
 		cout << "That move can no longer be used!\n\n";
 		next;
 		return;
 	}
 
-	switch (this->p_move[1].m_ID)
+	switch (this->p_move[moveNum].m_ID)
 	{
 		case TACKLE: this->tackle(foe); break;
 		case GROWL: this->growl(foe); break;
@@ -233,80 +233,102 @@ void Pokemon::move1(Pokemon &pkmn, Pokemon &foe)
 		case GROWTH: this->growth(pkmn); break;
 	}
 
-	this->p_move[1].m_PP--;
+	this->p_move[moveNum].m_PP--;
 }
 
-void Pokemon::move2(Pokemon &pkmn, Pokemon &foe)
+//PLAYER
+void Player::initPlayer(GameMode mode)
 {
-	if (this->p_move[2].m_PP <= 0)
+	this->bag[0] = { EMPTY, "_", 0 };
+	switch (mode)
 	{
-		cout << "That move can no longer be used!\n\n";
-		next;
-		return;
+		case CLASSIC:
+			this->numItems = 4;
+			this->bag[1] = { POTION, "Potion", 1 };
+			this->bag[2] = { ETHER, "Ether", 1 };
+			this->bag[3] = { XATTACK, "X Attack", 1 };
+			this->bag[4] = { XDEFENSE, "X Defense", 1 };
+			this->potions = true, this->ethers = true;
+			this->xAttacks = true, this->xDefenses = true;
+			this->pokeBalls = false;
+			break;
+
+		case ENDLESS:
+			this->numItems = 4;
+			this->bag[1] = { POTION, "Potion", 3 };
+			this->bag[2] = { ETHER, "Ether", 3 };
+			this->bag[3] = { XATTACK, "X Attack", 1 };
+			this->bag[4] = { XDEFENSE, "X Defense", 1 };
+			this->potions = true, this->ethers = true;
+			this->xAttacks = true, this->xDefenses = true;
+			this->pokeBalls = false;
+			break;
+
+		case CAMPAIGN:
+			this->numItems = 1;
+			this->bag[1] = { POKEBALL, "Poke Ball", 5 };
+			this->potions = false, this->ethers = false;
+			this->xAttacks = false, this->xDefenses = false;
+			this->pokeBalls = true;
 	}
 
-	switch (this->p_move[2].m_ID)
-	{
-		case TACKLE: this->tackle(foe); break;
-		case GROWL: this->growl(foe); break;
-		case SCRATCH: this->scratch(foe); break;
-		case TAILWHIP: this->tailWhip(foe); break;
-		case SANDATTACK: this->sandAttack(foe); break;
-		case GUST: this->gust(foe); break;
-		case PECK: this->peck(foe); break;
-		case ABSORB: this->absorb(foe); break;
-		case GROWTH: this->growth(pkmn); break;
-	}
-
-	this->p_move[2].m_PP--;
 }
 
-void Pokemon::move3(Pokemon &pkmn, Pokemon &foe)
+bool Player::item(int itemNum, Pokemon &foe)
 {
-	if (this->p_move[3].m_PP <= 0)
+	bool used = false;
+
+	if (this->bag[itemNum].i_num <= 0)
 	{
-		cout << "That move can no longer be used!\n\n";
-		next;
-		return;
+		cout << "Out of " << this->bag[itemNum].i_name << "s!\n\n", next;
+		return false;
 	}
 
-	switch (this->p_move[3].m_ID)
+	switch (this->bag[itemNum].i_ID)
 	{
-		case TACKLE: this->tackle(foe); break;
-		case GROWL: this->growl(foe); break;
-		case SCRATCH: this->scratch(foe); break;
-		case TAILWHIP: this->tailWhip(foe); break;
-		case SANDATTACK: this->sandAttack(foe); break;
-		case GUST: this->gust(foe); break;
-		case PECK: this->peck(foe); break;
-		case ABSORB: this->absorb(foe); break;
-		case GROWTH: this->growth(pkmn); break;
+		case POTION:
+			if (this->potion())
+				this->bag[itemNum].i_num--, used = true;
+			if (this->bag[itemNum].i_num <= 0)
+				this->potions = false;
+			break;
+
+		case ETHER:
+			if (this->ether())
+				this->bag[itemNum].i_num--, used = true;
+			if (this->bag[itemNum].i_num <= 0)
+				this->ethers = false;
+			break;
+
+		case XATTACK:
+			if (this->XAttack())
+				this->bag[itemNum].i_num--, used = true;
+			if (this->bag[itemNum].i_num <= 0)
+				this->xAttacks = false;
+			break;
+
+		case XDEFENSE:
+			if (this->XDefense())
+				this->bag[itemNum].i_num--, used = true;
+			if (this->bag[itemNum].i_num <= 0)
+				this->xDefenses = false;
+			break;
+
+		case POKEBALL:
+			if (this->pokeBall(foe))
+				this->bag[itemNum].i_num--, used = true;
+			if (this->bag[itemNum].i_num <= 0)
+				this->pokeBalls = false;
+			break;
 	}
 
-	this->p_move[3].m_PP--;
-}
-
-void Pokemon::move4(Pokemon &pkmn, Pokemon &foe)
-{
-	if (this->p_move[4].m_PP <= 0)
+	if (this->bag[itemNum].i_num <= 0)
 	{
-		cout << "That move can no longer be used!\n\n";
-		next;
-		return;
+		this->bag[itemNum] = this->bag[0];
+		for (int i = itemNum; i < this->numItems; i++)
+			this->bag[i] = this->bag[i + 1];
+		this->numItems--;
 	}
 
-	switch (this->p_move[4].m_ID)
-	{
-		case TACKLE: this->tackle(foe); break;
-		case GROWL: this->growl(foe); break;
-		case SCRATCH: this->scratch(foe); break;
-		case TAILWHIP: this->tailWhip(foe); break;
-		case SANDATTACK: this->sandAttack(foe); break;
-		case GUST: this->gust(foe); break;
-		case PECK: this->peck(foe); break;
-		case ABSORB: this->absorb(foe); break;
-		case GROWTH: this->growth(pkmn); break;
-	}
-
-	this->p_move[4].m_PP--;
+	return used;
 }

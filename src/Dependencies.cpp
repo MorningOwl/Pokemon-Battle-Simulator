@@ -83,6 +83,44 @@ void logMoveInfo(Pokemon pkmn, Move move)
 	}
 }
 
+void Player::logItemInfo(Item item)
+{
+	string space = "";
+	int longest = 0;
+
+	for (int i = 1; i <= this->numItems; i++)
+		if (strlen(this->bag[i].i_name) > longest)
+			longest = strlen(this->bag[i].i_name);
+
+	for (int i = strlen(item.i_name); i < longest; i++)
+		space += " ";
+
+	cout << item.i_name << ": " << space;
+
+	switch (item.i_ID)
+	{
+		case POTION:
+			cout << "A spray-type medicine for treating wounds. It can be used to restore\n        " << space << "20 HP to an injured Pokemon.\n\n";
+			break;
+
+		case ETHER:
+			cout << "This medicine can restore 10 PP to a single selected move that has been\n       " << space << "learned by a Pokemon.\n\n";
+			break;
+
+		case XATTACK:
+			cout << "An item that sharply boosts the Attack stat of a Pokemon during battle.\n          " << space << "It wears off once the Pokemon is withdrawn.\n\n";
+			break;
+
+		case XDEFENSE:
+			cout << "An item that sharply boosts the Defense stat of a Pokemon during battle.\n           " << space << "It wears off once the Pokemon is withdrawn.\n\n";
+			break;
+
+		case POKEBALL:
+			cout << "A device for catching wild Pokemon. It is thrown like a ball at a Pokemon,\n           " << space << "comfortably encapsuling its target.\n\n";
+			break;
+	}
+}
+
 
 //Operator Overloads
 void Pokemon::operator=(Pokemon pkmn)
@@ -162,6 +200,13 @@ bool Pokemon::operator==(Pokemon pkmn)
 	if (!(this->p_accuracyLevel == pkmn.p_accuracyLevel && this->p_evasionLevel == pkmn.p_evasionLevel)) return false;
 
 	return true;
+}
+
+void Item::operator=(Item item)
+{
+	this->i_ID = item.i_ID;
+	this->i_name = item.i_name;
+	this->i_num = item.i_num;
 }
 
 

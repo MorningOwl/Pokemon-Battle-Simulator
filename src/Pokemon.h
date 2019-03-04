@@ -5,6 +5,7 @@ enum GameMode { MENU, CLASSIC, MULTIPLAYER, ENDLESS, CAMPAIGN };
 enum PID { BULBASAUR, CHARMANDER, SQUIRTLE, PIDGEY, RATTATA, SPEAROW, ODDISH };
 enum Type { _, NORMAL, GRASS, FIRE, WATER, POISON, FLYING, GROUND };
 enum MID { NONE, TACKLE, GROWL, SCRATCH, TAILWHIP, SANDATTACK, GUST, PECK, ABSORB, GROWTH };
+enum I_ID { EMPTY, POTION, ETHER, XATTACK, XDEFENSE, POKEBALL };
 enum Effect { PHYSICAL, SPECIAL, STATUS, DAMAGE };
 
 
@@ -16,6 +17,17 @@ class Move
 		Type m_type;
 		const char* m_name;
 		int m_PP, m_PPMax;
+};
+
+
+class Item
+{
+	public:
+		I_ID i_ID = EMPTY;
+		const char* i_name;
+		int i_num;
+
+		void operator=(Item item);
 };
 
 
@@ -56,11 +68,6 @@ class Pokemon
 		void initMoves();
 
 		//Moves
-		void move1(Pokemon &pkmn, Pokemon &foe);
-		void move2(Pokemon &pkmn, Pokemon &foe);
-		void move3(Pokemon &pkmn, Pokemon &foe);
-		void move4(Pokemon &pkmn, Pokemon &foe);
-
 		void tackle(Pokemon &foe);
 		void growl(Pokemon &foe);
 		void scratch(Pokemon &foe);
@@ -70,6 +77,7 @@ class Pokemon
 		void peck(Pokemon &foe);
 		void absorb(Pokemon &foe);
 		void growth(Pokemon &pkmn);
+		void move(int moveNum, Pokemon &pkmn, Pokemon &foe);
 
 		//Dependencies
 		void changeStat(Pokemon &target, const char* stat, int det);
@@ -83,6 +91,34 @@ class Pokemon
 		bool operator==(Pokemon pkmn);		//Pokemon attributes
 
 		void refresh();
+};
+
+
+class Player
+{
+	public:
+		int y, x;
+		Item bag[6];
+		Pokemon pkmn, Pkmn[7];
+
+		int numPkmn = 1;
+		int numItems = 4;
+		bool battleEnd = false;
+
+		bool potions, ethers;
+		bool xAttacks, xDefenses;
+		bool pokeBalls;
+
+		bool potion();
+		bool ether();
+		bool XAttack();
+		bool XDefense();
+		bool pokeBall(Pokemon &foe);
+
+		Player(int y, int  x) :x(x), y(y) {};
+		void initPlayer(GameMode mode);
+		void logItemInfo(Item item);
+		bool item(int itemNum, Pokemon &foe);
 };
 
 

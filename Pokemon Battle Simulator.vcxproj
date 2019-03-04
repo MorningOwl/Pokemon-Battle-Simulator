@@ -140,6 +140,7 @@
     <ClCompile Include="src\Dependencies.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Initialize.cpp" />
+    <ClCompile Include="src\Items.cpp" />
     <ClCompile Include="src\Moves.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -172,10 +172,31 @@ void Pokemon::absorb(Pokemon &foe)
 
 void Pokemon::growth(Pokemon &pkmn)
 {
-	srand(time(0));
-
-	cout << this->p_name << " used Growth!\n\n";
-	next;
-
+	cout << this->p_name << " used Growth!\n\n", next;
 	changeStat(pkmn, "spAttack", 1);
+}
+
+void Pokemon::defenseCurl(Pokemon &pkmn)
+{
+	cout << this->p_name << " used Defense Curl!\n\n", next;
+	changeStat(pkmn, "defense", 1);
+}
+
+void Pokemon::thunderShock(Pokemon &foe)
+{
+	srand(time(0));
+	int prob = 100 * this->p_accuracy / foe.p_evasion;
+
+	cout << this->p_name << " used Thunder Shock!\n\n";
+
+	if (1 + rand() % 100 <= prob)
+		foe.p_HP -= damage(foe, 40, ELECTRIC, PHYSICAL);
+
+	else
+	{
+		next;
+		cout << this->p_name << " 's attack missed!\n\n";
+	}
+
+	next;
 }

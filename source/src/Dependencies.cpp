@@ -11,7 +11,7 @@ using namespace std;
 void logMove(Pokemon pkmn, const char* move, int num, bool nextLine)
 {
 	string space = "";
-	
+
 	for (int i = strlen(move); i <= 11; i++)
 		space += " ";
 
@@ -45,41 +45,48 @@ void logMoveInfo(Pokemon pkmn, Move move)
 
 	switch (move.m_ID)
 	{
-		case TACKLE:
-			cout << "A physical attack in which the user charges and slams into the target\n        " << space << "with its whole body.\n\n";
-			break;
+	case TACKLE:
+		cout << "A physical attack in which the user charges and slams into the target\n        " << space << "with its whole body.\n\n";
+		break;
 
-		case GROWL:
-			cout << "The user growls in an endearing way, making the opposing Pokemon less\n       " << space << "wary. This lowers their Attack stat.\n\n";
-			break;
+	case GROWL:
+		cout << "The user growls in an endearing way, making the opposing Pokemon less\n       " << space << "wary. This lowers their Attack stat.\n\n";
+		break;
 
-		case SCRATCH:
-			cout << "Hard, pointed, sharp claws rake the target to inflict damage.\n\n";
-			break;
+	case SCRATCH:
+		cout << "Hard, pointed, sharp claws rake the target to inflict damage.\n\n";
+		break;
 
-		case TAILWHIP:
-			cout << "The user wags its tail cutely, making the opposing Pokemon less wary\n           " << space << "and lowering their Defense stat.\n\n";
-			break;
+	case TAILWHIP:
+		cout << "The user wags its tail cutely, making the opposing Pokemon less wary\n           " << space << "and lowering their Defense stat.\n\n";
+		break;
 
-		case SANDATTACK:
-			cout << "Sand is hurled in the target's face, reducing the target's accuracy.\n\n";
-			break;
+	case SANDATTACK:
+		cout << "Sand is hurled in the target's face, reducing the target's accuracy.\n\n";
+		break;
 
-		case GUST:
-			cout << "A gust of wind is whipped up by wings and launched at the target to\n      " << space << "inflict damage.\n\n";
-			break;
+	case GUST:
+		cout << "A gust of wind is whipped up by wings and launched at the target to\n      " << space << "inflict damage.\n\n";
+		break;
 
-		case PECK:
-			cout << "The target is jabbed with a sharply pointed beak or horn.\n\n";
-			break;
+	case PECK:
+		cout << "The target is jabbed with a sharply pointed beak or horn.\n\n";
+		break;
 
-		case ABSORB:
-			cout << "A nutrient-draining attack. The user's HP is restored by half the\n        " << space << "damage taken by the target.\n\n";
-			break;
+	case ABSORB:
+		cout << "A nutrient-draining attack. The user's HP is restored by half the\n        " << space << "damage taken by the target.\n\n";
+		break;
 
-		case GROWTH:
-			cout << "The user's body grows all at once, raising the Attack and Special\n        " << space << "Attack stats.\n\n";
-			break;
+	case GROWTH:
+		cout << "The user's body grows all at once, raising the Attack and Special\n        " << space << "Attack stats.\n\n";
+		break;
+
+	case DEFENSECURL:
+		cout << "The user curls up to conceal weak spots and raise its Defense stat.\n\n";
+		break;
+
+	case THUNDERSHOCK:
+		cout << "A jolt of electricity crashes down on the target to inflict damage.\n\n";
 	}
 }
 
@@ -99,25 +106,25 @@ void Player::logItemInfo(Item item)
 
 	switch (item.i_ID)
 	{
-		case POTION:
-			cout << "A spray-type medicine for treating wounds. It can be used to restore\n        " << space << "20 HP to an injured Pokemon.\n\n";
-			break;
+	case POTION:
+		cout << "A spray-type medicine for treating wounds. It can be used to restore\n        " << space << "20 HP to an injured Pokemon.\n\n";
+		break;
 
-		case ETHER:
-			cout << "This medicine can restore 10 PP to a single selected move that has been\n       " << space << "learned by a Pokemon.\n\n";
-			break;
+	case ETHER:
+		cout << "This medicine can restore 10 PP to a single selected move that has been\n       " << space << "learned by a Pokemon.\n\n";
+		break;
 
-		case XATTACK:
-			cout << "An item that sharply boosts the Attack stat of a Pokemon during battle.\n          " << space << "It wears off once the Pokemon is withdrawn.\n\n";
-			break;
+	case XATTACK:
+		cout << "An item that sharply boosts the Attack stat of a Pokemon during battle.\n          " << space << "It wears off once the Pokemon is withdrawn.\n\n";
+		break;
 
-		case XDEFENSE:
-			cout << "An item that sharply boosts the Defense stat of a Pokemon during battle.\n           " << space << "It wears off once the Pokemon is withdrawn.\n\n";
-			break;
+	case XDEFENSE:
+		cout << "An item that sharply boosts the Defense stat of a Pokemon during battle.\n           " << space << "It wears off once the Pokemon is withdrawn.\n\n";
+		break;
 
-		case POKEBALL:
-			cout << "A device for catching wild Pokemon. It is thrown like a ball at a Pokemon,\n           " << space << "comfortably encapsuling its target.\n\n";
-			break;
+	case POKEBALL:
+		cout << "A device for catching wild Pokemon. It is thrown like a ball at a Pokemon,\n           " << space << "comfortably encapsuling its target.\n\n";
+		break;
 	}
 }
 

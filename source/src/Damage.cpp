@@ -35,31 +35,57 @@ double Pokemon::stab(Type moveType)
 
 double Pokemon::typeDamage(Pokemon &foe, Type moveType)
 {
-	double det = 0;
+	double det = 1;
 
 	if (foe.p_type1 == GRASS || foe.p_type2 == GRASS)
 	{
 		if (moveType == FIRE || moveType == FLYING) det = 2;
-		else if (moveType == WATER || moveType == GRASS) det = 0.5;
+		else if (moveType == GRASS || moveType == WATER || moveType == ELECTRIC) det = 0.5;
+		else if (moveType == GROUND)
+		{
+			if (foe.p_type1 == POISON || foe.p_type2 == POISON) det = 1;
+			else det = 2;
+		}
 	}
 
 
 	else if (foe.p_type1 == WATER || foe.p_type2 == WATER)
 	{
-		if (moveType == GRASS) det = 2;
-		else if (moveType == FIRE || moveType == WATER) det = 0.5;
+		if (moveType == GRASS || moveType == ELECTRIC) det = 2;
+		else if (moveType == WATER || moveType == FIRE) det = 0.5;
 	}
 
 
-	if (foe.p_type1 == FIRE || foe.p_type2 == FIRE)
+	else if (foe.p_type1 == FIRE || foe.p_type2 == FIRE)
 	{
-		if (moveType == WATER) det = 2;
-		else if (moveType == GRASS || moveType == FIRE) det = 0.5;
+		if (moveType == WATER || moveType == GROUND) det = 2;
+		else if (moveType == FIRE || moveType == GRASS) det = 0.5;
 	}
 
 	else if (foe.p_type1 == FLYING || foe.p_type2 == FLYING)
 	{
-		if (moveType == GRASS) det = 0.5;
+		if (moveType == ELECTRIC) det = 2;
+		else if (moveType == FLYING || moveType == GRASS) det = 0.5;
+		else if (moveType == GROUND) det = 0;
+	}
+
+	else if (foe.p_type1 == ROCK || foe.p_type2 == ROCK)
+	{
+		if (moveType == WATER || moveType == GRASS || moveType == GROUND) det = 2;
+		else if (moveType == ROCK || moveType == NORMAL || moveType == ELECTRIC) det = 0.5;
+	}
+
+	else if (foe.p_type1 == ELECTRIC || foe.p_type2 == ELECTRIC)
+	{
+		if (moveType == GROUND) det = 2;
+		else if (moveType == ELECTRIC || moveType == FLYING) det = 0.5;
+	}
+
+	else if (foe.p_type1 == GROUND || foe.p_type2 == GROUND)
+	{
+		if (moveType == WATER || moveType == GRASS) det = 2;
+		else if (moveType == ROCK) det = 0.5;
+		else if (moveType == ELECTRIC) det = 0;
 	}
 
 	if (det == 2)
@@ -67,18 +93,23 @@ double Pokemon::typeDamage(Pokemon &foe, Type moveType)
 		system("pause");
 		system("cls");
 		cout << "It's super effective!\n\n";
-		return det;
 	}
 
-	if (det == 0.5)
+	else if (det == 0.5)
 	{
 		system("pause");
 		system("cls");
 		cout << "It's not very effective...\n\n";
-		return det;
 	}
 
-	return 1;
+	else if (det == 0)
+	{
+		system("pause");
+		system("cls");
+		cout << "It doesn't affect " << foe.p_name << "!\n\n";
+	}
+
+	return det;
 }
 
 double Pokemon::modifier(Pokemon &foe, Type moveType)

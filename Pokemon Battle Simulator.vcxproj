@@ -72,18 +72,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>C:\Development\Coding\Games\Pokemon Battle Simulator\Pokemon Battle Simulator\source\headers;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>C:\Development\Coding\Games\Pokemon Battle Simulator\Pokemon Battle Simulator\source\headers;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>C:\Development\Coding\Games\Pokemon Battle Simulator\Pokemon Battle Simulator\source\headers;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>C:\Development\Coding\Games\Pokemon Battle Simulator\Pokemon Battle Simulator\source\headers;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -130,18 +134,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Dependencies.h" />
-    <ClInclude Include="src\Maps.h" />
-    <ClInclude Include="src\Pokemon.h" />
+    <ClInclude Include="source\headers\Dependencies.h" />
+    <ClInclude Include="source\headers\Maps.h" />
+    <ClInclude Include="source\headers\Pokemon.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Change Stat.cpp" />
-    <ClCompile Include="src\Damage.cpp" />
-    <ClCompile Include="src\Dependencies.cpp" />
-    <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\Initialize.cpp" />
-    <ClCompile Include="src\Items.cpp" />
-    <ClCompile Include="src\Moves.cpp" />
+    <ClCompile Include="source\src\Change Stat.cpp" />
+    <ClCompile Include="source\src\Damage.cpp" />
+    <ClCompile Include="source\src\Dependencies.cpp" />
+    <ClCompile Include="source\src\Game.cpp" />
+    <ClCompile Include="source\src\Initialize.cpp" />
+    <ClCompile Include="source\src\Items.cpp" />
+    <ClCompile Include="source\src\Moves.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -54,7 +54,7 @@ bool Player::ether()
 			else
 			{
 				cout << "Used an ether!\n\n", next;
-				
+
 				if (pkmn.p_move[i].m_PP < pkmn.p_move[i].m_PPMax - 5)
 					pkmn.p_move[i].m_PP += 10;
 				else

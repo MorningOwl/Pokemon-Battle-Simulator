@@ -15,36 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Pokemon.h">
+    <ClInclude Include="source\headers\Pokemon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Dependencies.h">
+    <ClInclude Include="source\headers\Dependencies.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Maps.h">
+    <ClInclude Include="source\headers\Maps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Moves.cpp">
+    <ClCompile Include="source\src\Initialize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Damage.cpp">
+    <ClCompile Include="source\src\Moves.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game.cpp">
+    <ClCompile Include="source\src\Items.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Change Stat.cpp">
+    <ClCompile Include="source\src\Change Stat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Dependencies.cpp">
+    <ClCompile Include="source\src\Damage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Initialize.cpp">
+    <ClCompile Include="source\src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Items.cpp">
+    <ClCompile Include="source\src\Dependencies.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
